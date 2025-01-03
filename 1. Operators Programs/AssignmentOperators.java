@@ -28,6 +28,10 @@ public class AssignmentOperators
         
         // a /= b;    =>    a = a / b => 2  Here it gets the Quotient value when a divided by b so 10 / 5 = 2
         System.out.println("a /= b : " + (a/=b));
+
+System.out.print what is happening in this file;
+
+because this is like the happening to me and I think I am just keeping my goals aside not giving any priority to them
     }
     
 	public static void main(String[] args) {
