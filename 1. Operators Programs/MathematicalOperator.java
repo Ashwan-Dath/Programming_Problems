@@ -8,7 +8,7 @@ System.out.print("Hi hello Vanakam");
 public static void Easy (){
 int a=10;
 int b=15;
-
+System.out.print("");
 
 }
 }
