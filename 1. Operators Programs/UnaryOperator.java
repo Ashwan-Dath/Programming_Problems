@@ -80,11 +80,11 @@ public class UnaryOperator
 
         int a = 10;
         int b = 5;
-        System.out.println(" a += 5 - 2 * 4 => "+ ( a += b -= 2 * 4) );  
+        System.out.println(" a++ + --b * 4 / 2 => "+ ( a++ + --b * 4 / 2) );  
         System.out.println("Value of a : "+ a);
         System.out.println("Value of b : "+ b);
         //  Here the calculation is evaluated as 
-        //  a = a + ( b = 5 - (2 * 4))
+        //  a = 10 + 4 * 4 / 2 
         //  1. BODMAS RULE first calculate the values inside BRACKET, inner Bracket first => (2 * 4 )
         //  2. Then 2 * 4 => (5 - 8)
         //  3. Then 5 - 8 => NOW  b = -3
@@ -92,22 +92,5 @@ public class UnaryOperator
         //  5. Now a = 7, b = -3
         //  6. ( a += b -= 2 * 4) this expression first has the 'a' variable so the value inside the 
         //      'a' variable is printed.
-        
-        // //  Now Same as the above explanation calculte the below questions
-        int c = 2;
-        int d = 4;
-        System.out.println(" c *= d /= 2 => "+ ( c *= d /= 2 ) );  
-        System.out.println("Value of c : "+ c);
-        System.out.println("Value of d : "+ d);
-        // This is evaluated as : c = 2 * (d = 4 / 2);  => Answer is : c = ?, d = ?;
-        
-        
-        
-        int e = 5;
-        int f = 15;
-        System.out.println(" e %= f -= 10 => "+ ( e %= f -= 10 ) );  
-        System.out.println("Value of e : "+ e);
-        System.out.println("Value of f : "+ f);
-        // This is evaluated as : e = 5 % (f = 15 - 10);  => Answer is : e =?, f =? ;
     }
 }
