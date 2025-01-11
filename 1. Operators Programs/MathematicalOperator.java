@@ -39,8 +39,8 @@ public class MathematicalOperator
 
     // Medium level: Demonstrating Mathematical operators
     public static void Medium (){
-        int a = 15;
-        int b = 10;
+        int aa = 15;
+        int bb = 10;
 
         // For complex expressions it will follow BODMAS rule 
         //  1. Bracket () : In any expression it will first do calculation present inside a bracket
@@ -50,16 +50,16 @@ public class MathematicalOperator
         //  4. Addition & Substraction : Then it will do calculation if both presents then it performs actions 
         //                                  from left to right s
         
-        System.out.println("a + 10 * 5 - b => " + (a + 10 * 5 - b));
+        System.out.println("aa + 10 * 5 - bb => " + (aa + 10 * 5 - bb));
         // First it will do Multiplication then substraction and addition 
         
 
-        System.out.println("a * b - (10 - 5) => " + (a * b - (10 - 5)));
+        System.out.println("aa * bb - (10 - 5) => " + (aa * bb - (10 - 5)));
         // First it will do calculation present inside bracket (10 - 5) then it will do multiplication and sub
 
 
         // Practice questions
-        System.out.println("5 - 7 * b + (a - 4) => " + (5 - 7 * b + (a - 4 )));
+        System.out.println("5 - 7 * bb + (aa - 4) => " + (5 - 7 * bb + (aa - 4 )));
     }
 
     public static void Hard(){

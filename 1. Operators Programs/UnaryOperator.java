@@ -46,31 +46,31 @@ public class UnaryOperator
 
     //  This Method is to demostrate the Medium Level complexity of the UNARY Operator
     public static void Medium() {
-        int a = 2;
-        int b = 5;
+        int aa = 2;
+        int bb = 5;
         
-        System.out.println(" a++ + --b => " + (a++ + --b));  // a = 3 , b = 4
-        System.out.println("Value of a : "+ a);
-        System.out.println("Value of b : "+ b);
+        System.out.println(" aa++ + --bb => " + (aa++ + --bb));  // aa = 3 , bb = 4
+        System.out.println("Value of aa : "+ aa);
+        System.out.println("Value of bb : "+ bb);
         // In the above expression 
-        // 1. a++: first a variable value is taken into consideration that is 
-        // 2. --b: first 1 value is substracted from 5 so 5-1 = 4 so 4 is now taken into consideration
+        // 1. aa++: first aa variable value is taken into consideration that is 
+        // 2. --bb: first 1 value is substracted from 5 so 5-1 = 4 so 4 is now taken into consideration
         // 3. 2 + 4 => ANSWER is 6
         // NOTE: if the "++, --" Operators comes first then the value is sub, add then the resulted value is taken into consideration
         // NOTE: if the "++, --" Operators comes after then the value is taken into consideration and the value is calculated later.
 
-        int c = 10;
-        int d = 3;
-        System.out.println(" --d-++c---c+--d =>"+ (--d-++c---c+--d));
-        System.out.println("Value of c : "+ c);
-        System.out.println("Value of d : "+ d);
-        // it is evaluated as --d - ++c - --c + --d
+        int cc = 10;
+        int dd = 3;
+        System.out.println(" --dd - ++cc - --cc + --dd =>"+ (--dd - ++cc - --cc + --dd));
+        System.out.println("Value of cc : "+ cc);
+        System.out.println("Value of dd : "+ dd);
+        // it is evaluated as --dd - ++cc - --cc + --dd
 
-        int e = 8;
-        int f = 56;
-        System.out.println(" e++ - f++ - --e - --e - --e - --f - --f + ++f + ++e => " + (e++-f++---e---e---e---f---f+++f+++e));
-        System.out.println("Value of e : " + e);
-        System.out.println("Value of f : " + f );
+        int ee = 8;
+        int ff = 56;
+        System.out.println(" ee++ - ff++ - --ee - --ee - --ee - --ff - --ff + ++ff + ++ee => " + (ee++ - ff++ - --ee - --ee - --ee - --ff - --ff + ++ff + ++ee));
+        System.out.println("Value of ee : " + ee);
+        System.out.println("Value of ff : " + ff );
     }
     
     
@@ -78,19 +78,19 @@ public class UnaryOperator
     public static void Hard() {
 
 
-        int a = 10;
-        int b = 5;
-        System.out.println(" a++ + --b * 4 / 2 => "+ ( a++ + --b * 4 / 2) );  
-        System.out.println("Value of a : "+ a);
-        System.out.println("Value of b : "+ b);
+        int aaa = 10;
+        int bbb = 5;
+        System.out.println(" aaa++ + --bbb * 4 / 2 => "+ ( aaa++ + --bbb * 4 / 2) );  
+        System.out.println("Value of aaa : "+ aaa);
+        System.out.println("Value of bbb : "+ bbb);
         //  Here the calculation is evaluated as 
-        //  a = 10 + 4 * 4 / 2 
+        //  aaa = 10 + 4 * 4 / 2 
         //  1. BODMAS RULE first calculate the values inside BRACKET, inner Bracket first => (2 * 4 )
         //  2. Then 2 * 4 => (5 - 8)
-        //  3. Then 5 - 8 => NOW  b = -3
-        //  4. Now a = 10, so  a = 10 + (-3) => 7
-        //  5. Now a = 7, b = -3
-        //  6. ( a += b -= 2 * 4) this expression first has the 'a' variable so the value inside the 
-        //      'a' variable is printed.
+        //  3. Then 5 - 8 => NOW  bbb = -3
+        //  4. Now aaa = 10, so  aaa = 10 + (-3) => 7
+        //  5. Now aaa = 7, bbb = -3
+        //  6. ( aaa += bbb -= 2 * 4) this expression first has the 'aaa' variable so the value inside the 
+        //      'aaa' variable is printed.
     }
 }
