@@ -1,4 +1,4 @@
-public class RelationalOperator
+class RelationalOperator
 {
 	public static void main(String[] args) {
 	   // Easy();

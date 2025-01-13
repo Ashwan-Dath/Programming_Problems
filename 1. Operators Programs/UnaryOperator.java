@@ -1,4 +1,4 @@
-public class UnaryOperator
+class UnaryOperator
 {
     // UNARY Operators => ++, -- , !
 	public static void main(String[] args) {

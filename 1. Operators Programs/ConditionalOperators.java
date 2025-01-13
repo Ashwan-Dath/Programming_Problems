@@ -1,4 +1,4 @@
-public class ConditionalOperators
+class ConditionalOperators
 {
 	public static void main(String[] args) {
 	    Easy();

@@ -1,4 +1,4 @@
-public class MathematicalOperator
+class MathematicalOperator
 {
     //  This is experimenting the MATHEMATICAL OPERATOR  -, +, *, /, %
     public static void main(String [] args){ 
