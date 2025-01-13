@@ -1,4 +1,4 @@
-public class AssignmentOperators
+class AssignmentOperators
 {
     
 	public static void main(String[] args) {
