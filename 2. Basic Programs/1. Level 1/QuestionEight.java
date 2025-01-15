@@ -33,16 +33,19 @@ class QuestionEight
 	}
 	
 	public static void  Answer(){
-	    
-	    int startingNumber = scan.nextInt();
-	    int endingNumber = scan.nextInt();
-	    
-	    for( int start = startingNumber ; start <= endingNumber ; start++ ){
-	        
-	        System.out.print(   start % 11 == 0 ? start+" " : "" );
-	        // Here i first confirmed whether the number is perfectly divisible by 11 
-	        // If it is divided perfectly then it is the divisor of 11 and printed the number
-	    } 
+	    try{
+            int startingNumber = scan.nextInt();
+            int endingNumber = scan.nextInt();
+            
+            for( int start = startingNumber ; start <= endingNumber ; start++ ){
+                
+                System.out.print(   start % 11 == 0 ? start+" " : "" );
+                // Here i first confirmed whether the number is perfectly divisible by 11 
+                // If it is divided perfectly then it is the divisor of 11 and printed the number
+            } 
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
         
 	}
 }

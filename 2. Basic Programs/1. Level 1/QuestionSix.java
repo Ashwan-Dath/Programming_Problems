@@ -30,19 +30,24 @@ class QuestionSix
 	}
 	
 	public static void  Answer(){
-	    int number = scan.nextInt();
-	    
-	    if(number <= 100  || number >= 1000){   
-	        System.out.println("WRONG NUMBER");
-	        return;
-	    }
-	    
-	    // letting only numbers present between 101 - 999 only
-	    
-	    if(number%2 == 0){  // Checking whether the number is even or odd
-	        System.out.println( number % 3 );
-	    }else{
-	        System.out.println( number % 2 );
-	    }
+
+        try{
+            int number = scan.nextInt();
+            
+            if(number <= 100  || number >= 1000){   
+                System.out.println("WRONG NUMBER");
+                return;
+            }
+            
+            // letting only numbers present between 101 - 999 only
+            
+            if(number%2 == 0){  // Checking whether the number is even or odd
+                System.out.println( number % 3 );
+            }else{
+                System.out.println( number % 2 );
+            }
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }

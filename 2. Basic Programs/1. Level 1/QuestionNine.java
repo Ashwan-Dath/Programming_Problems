@@ -41,30 +41,35 @@ class QuestionNine
 	
 	
 	public static void  Answer(){
-        int n = scan.nextInt();
-	    
-	    if(n < 0 || n >= 100){   // Checking whether the given number is in range
-	        System.out.println("INVALID INPUT");
-	        return;
-	    }
-	    else if(n>=91 && n<100){    // Number must be in between 91-100
-	        System.out.println("SUPER SMART");
-	    }
-	    else if(n>=81 && n<=90){    // Number must be in between 81-90
-	        System.out.println("SMART");
-	    }
-	    else if(n>=71 && n<=80){    // Number must be in between 71-80
-	        System.out.println("SMART ENOUGH");
-	    }
-	    else if(n>=61 && n<=70){    // Number must be in between 61-70
-	        System.out.println("JUST SMART");
-	    }
-	    else if(n>=36 && n<=60){    // Number must be in between 36-60
-	        System.out.println("NO SMART");
-	    }
-	    else{   // Number must be in between 0-35
-	        System.out.println("DUMB");
-	    }
+		try{
+			int n = scan.nextInt();
+			
+			if(n < 0 || n >= 100){   // Checking whether the given number is in range
+				System.out.println("INVALID INPUT");
+				return;
+			}
+			else if(n>=91 && n<100){    // Number must be in between 91-100
+				System.out.println("SUPER SMART");
+			}
+			else if(n>=81 && n<=90){    // Number must be in between 81-90
+				System.out.println("SMART");
+			}
+			else if(n>=71 && n<=80){    // Number must be in between 71-80
+				System.out.println("SMART ENOUGH");
+			}
+			else if(n>=61 && n<=70){    // Number must be in between 61-70
+				System.out.println("JUST SMART");
+			}
+			else if(n>=36 && n<=60){    // Number must be in between 36-60
+				System.out.println("NO SMART");
+			}
+			else{   // Number must be in between 0-35
+				System.out.println("DUMB");
+			}
+			
+		}catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 
 	}
 	
