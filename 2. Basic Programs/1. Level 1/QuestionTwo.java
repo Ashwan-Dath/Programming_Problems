@@ -28,21 +28,26 @@ class QuestionTwo
 	}
 	
 	public static void Answer(){
-	    int firstNumber = scan.nextInt();
-	    int secondNumber = scan.nextInt();
-	    char symbol = scan.next().charAt(0);
-	    if(symbol == '+'){
-	        System.out.println("The symbol is "+symbol+" so we add : "+firstNumber+" + "+ secondNumber + " = " + (firstNumber + secondNumber));
-	    }else if (symbol == '-' ){
-	        System.out.println("The symbol is "+symbol+" so we substract : "+firstNumber+" - "+ secondNumber + " = " + (firstNumber - secondNumber));
-	    }else if(symbol == '*'){
-	        System.out.println("The symbol is "+symbol+" so we multiply : "+firstNumber+" * "+ secondNumber + " = " + (firstNumber * secondNumber));
-	    }else if (symbol == '/'){
-	        System.out.println("The symbol is "+symbol+" so we divide : "+firstNumber+" / "+ secondNumber + " = " + (firstNumber / secondNumber));
-	    }else if (symbol == '%'){
-	        System.out.println("The symbol is "+symbol+" so we mod : "+firstNumber+" % "+ secondNumber + " = " + (firstNumber % secondNumber));
-	    }else{
-	        System.out.println("Invalid Symbol");
-	    }
+		try{
+			int firstNumber = scan.nextInt();
+			int secondNumber = scan.nextInt();
+			char symbol = scan.next().charAt(0);
+			if(symbol == '+'){
+				System.out.println("The symbol is "+symbol+" so we add : "+firstNumber+" + "+ secondNumber + " = " + (firstNumber + secondNumber));
+			}else if (symbol == '-' ){
+				System.out.println("The symbol is "+symbol+" so we substract : "+firstNumber+" - "+ secondNumber + " = " + (firstNumber - secondNumber));
+			}else if(symbol == '*'){
+				System.out.println("The symbol is "+symbol+" so we multiply : "+firstNumber+" * "+ secondNumber + " = " + (firstNumber * secondNumber));
+			}else if (symbol == '/'){
+				System.out.println("The symbol is "+symbol+" so we divide : "+firstNumber+" / "+ secondNumber + " = " + (firstNumber / secondNumber));
+			}else if (symbol == '%'){
+				System.out.println("The symbol is "+symbol+" so we mod : "+firstNumber+" % "+ secondNumber + " = " + (firstNumber % secondNumber));
+			}else{
+				System.out.println("Invalid Symbol");
+			}
+			
+		}catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }

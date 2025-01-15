@@ -27,20 +27,25 @@ class QuestionThree
 	}
 	
 	public static void  Answer(){
-	    int startingPoint = scan.nextInt();
-	    int EndingPoint = scan.nextInt();
-	    
-	    int sum = 0;    // Taking a 'sum' variable to store the sum of the values
-	    
-	    if(EndingPoint < startingPoint){
-	        System.out.println("INVALID RANGE");
-	        return;
-	    }
-	    
-	    for (int start = startingPoint; start <= EndingPoint ; start++ ){   // For running a loop through the numbers
-	        sum += start;   // storing the added values into 'sum' variable
-	    } 
-	    
-	    System.out.println("The sum of the numbers between given range "+startingPoint +" "+ EndingPoint+ " is = "+ sum);
+		try{
+			int startingPoint = scan.nextInt();
+			int EndingPoint = scan.nextInt();
+			
+			int sum = 0;    // Taking a 'sum' variable to store the sum of the values
+			
+			if(EndingPoint < startingPoint){
+				System.out.println("INVALID RANGE");
+				return;
+			}
+			
+			for (int start = startingPoint; start <= EndingPoint ; start++ ){   // For running a loop through the numbers
+				sum += start;   // storing the added values into 'sum' variable
+			} 
+			
+			System.out.println("The sum of the numbers between given range "+startingPoint +" "+ EndingPoint+ " is = "+ sum);
+			
+		}catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }

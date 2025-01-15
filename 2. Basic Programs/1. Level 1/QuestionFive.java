@@ -30,16 +30,20 @@ class QuestionFive
 	
 
 	public static void  Answer(){
-	    int firstNumber = scan.nextInt();
-	    int secondNumber = scan.nextInt();
-	    int thirdNumber = scan.nextInt(); 
-	    
-	    if(firstNumber > secondNumber && firstNumber > thirdNumber){
-	        System.out.print(firstNumber + " is a Biggest Number from the Given Numbers");
-	    }else if(secondNumber > thirdNumber && secondNumber > firstNumber){
-            System.out.print(secondNumber + " is a Biggest Number from the Given Numbers");
-	    }else{
-            System.out.print(thirdNumber + " is a Biggest Number from the Given Numbers");
-	    }
+        try{
+            int firstNumber = scan.nextInt();
+            int secondNumber = scan.nextInt();
+            int thirdNumber = scan.nextInt(); 
+            
+            if(firstNumber > secondNumber && firstNumber > thirdNumber){
+                System.out.print(firstNumber + " is a Biggest Number from the Given Numbers");
+            }else if(secondNumber > thirdNumber && secondNumber > firstNumber){
+                System.out.print(secondNumber + " is a Biggest Number from the Given Numbers");
+            }else{
+                System.out.print(thirdNumber + " is a Biggest Number from the Given Numbers");
+            }
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }

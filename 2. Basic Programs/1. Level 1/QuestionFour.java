@@ -28,16 +28,20 @@ class QuestionFour
 	}
 	
 	public static void  Answer(){
-	    int range = scan.nextInt(); 
-	    
-	    if(range <= 10 || range >= 100){   // Just confirming that the range is between 11 to 99 only
-	        System.out.println("INVALID RANGE");
-	        return;     // Ending the program if the range is too low or too high
-	    }  
-	    
-	    for (int start = 1; start <= range ; start++ ){   // For running a loop through the numbers
-	        System.out.println(start + " : HI");
-	    } 
+        try{
+            int range = scan.nextInt(); 
+            
+            if(range <= 10 || range >= 100){   // Just confirming that the range is between 11 to 99 only
+                System.out.println("INVALID RANGE");
+                return;     // Ending the program if the range is too low or too high
+            }  
+            
+            for (int start = 1; start <= range ; start++ ){   // For running a loop through the numbers
+                System.out.println(start + " : HI");
+            } 
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	    
 	}
 }

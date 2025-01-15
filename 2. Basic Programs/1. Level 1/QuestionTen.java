@@ -32,18 +32,21 @@ class QuestionTen
 	
 	
 	public static void  Answer(){
-        int startingrange = scan.nextInt();
-        int endingrange = scan.nextInt();
-        
-        if(startingrange >= endingrange){  // Closing the program if the Starting range is greater than or equal to Ending range
-            System.out.println("INVALID RANGE");
-            return;
+        try{ 
+            int startingrange = scan.nextInt();
+            int endingrange = scan.nextInt();
+            
+            if(startingrange >= endingrange){  // Closing the program if the Starting range is greater than or equal to Ending range
+                System.out.println("INVALID RANGE");
+                return;
+            }
+            
+            for (int index = startingrange; index <= endingrange ; index++ ){
+                System.out.print( index % 2 == 0 ? index+" " : "");
+            }
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
         }
-        
-        for (int index = startingrange; index <= endingrange ; index++ ){
-            System.out.print( index % 2 == 0 ? index+" " : "");
-        } 
-        
 	}
 	
 	

@@ -25,10 +25,15 @@ class QuestionOne
 	}
 	
 	public static void Answer(){
-	    float input = scan.nextFloat();     // Taking input from the USER
-	    int Grams = (int)(input * 1000);    // Converting KG's into GRAMS
-	    System.out.println(input + " kgs is equal to " + Grams + " grams");
-	   // To convert kgs into grams we just have to multiply the value by 1000
-	   // The KG's in taken in decimal points to convert it into whole numbers we have to do type casting (int)
+        try{
+            float input = scan.nextFloat();     // Taking input from the USER
+            int Grams = (int)(input * 1000);    // Converting KG's into GRAMS
+            System.out.println(input + " kgs is equal to " + Grams + " grams");
+            // To convert kgs into grams we just have to multiply the value by 1000
+            // The KG's in taken in decimal points to convert it into whole numbers we have to do type casting (int)
+            
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }

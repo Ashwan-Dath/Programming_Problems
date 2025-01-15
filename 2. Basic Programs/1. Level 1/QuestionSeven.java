@@ -29,8 +29,12 @@ class QuestionSeven
 	}
 	
 	public static void  Answer(){
-	    int number = scan.nextInt();
-	    float farenheit = (float)number*9/5+32;
-	    System.out.println(number + " Celcius = "+ farenheit +"F");
+        try{
+            int number = scan.nextInt();
+            float farenheit = (float)number*9/5+32;
+            System.out.println(number + " Celcius = "+ farenheit +"F");
+        }catch(Exception e){
+            System.out.print("Exception occured : "+e);
+        }
 	}
 }
