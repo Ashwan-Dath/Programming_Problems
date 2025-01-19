@@ -51,6 +51,5 @@ class Main
 	        System.out.print("Exception Occured : " + e);
 	    }
 	    
-	    
 	}
 }
