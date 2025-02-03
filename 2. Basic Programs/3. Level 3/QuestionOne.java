@@ -33,7 +33,7 @@ class QuestionOne
     	    if(number<0){   // converting  negative number into positive number
     	        number = -(number);
     	    }
-    	    System.out.print(number);
+
     	    for ( int index = 1 ; index <= number ; index++ ){
     	        
     	        if(index == number){    // This is to place a '.' at the end
