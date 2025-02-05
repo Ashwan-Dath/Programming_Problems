@@ -9,7 +9,7 @@ class QuestionOne
 	public static void main(String[] args) {
 	   
         // Question : Write a program to print all factors of the Given Number.
-        
+	
         // Constraints:
         // Input          :- First Line of Input Consists of One Integer Value.
         // Output        :- Print All the Factors of a Given Number.
@@ -44,10 +44,10 @@ class QuestionOne
     	        return;
     	    } 
     	    
-    	    for ( int i = range; i >= 1 ; i-- ){
-    	        for ( int j = 1; j <= range ; j++ ){
-    	            System.out.printf( i * j == range ? j+" "  : "");
-    	        } 
+    	    for ( int i = 1; i <= range ; i++ ){
+    	        System.out.print( range % i == 0 ? i+" " : "");
+    	       //                       |
+    	       // This condition is to check whether our number is divisible by the the number or not
     	    } 
 
 	    } catch(Exception e) {
