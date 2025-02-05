@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 // Sum of the prime numbers in a range
-
 class QuestionThree
 {
     
@@ -9,8 +8,7 @@ class QuestionThree
     
 	public static void main(String[] args) {
 	   
-        // Question : Write a program to find Average of all Prime Numbers between the Given Values.
-        //             (Print the value upto 3 digits after Decimal Point)
+        // Question : Write a program to find Sum of all Prime Numbers between the Given Values.
         
         // Constraints:
         // Input          :- First Line of Input Consists of One Integer Value ( Minimum Value ) .
@@ -69,23 +67,72 @@ class QuestionThree
     	        return;
     	    } 
     	    
-    	    int sum = 0;     // To store the sum of the prime Numbers
-    	    startingrange++; 
-    	    for ( ; startingrange < endingrange ; startingrange++ ){
-    	        int prime = 0;
-    	        for ( int i = 1 ; i <= startingrange ; i++ ){
-    	            for ( int j = 1 ; j <= startingrange ; j++ ){
-    	                if( i * j == startingrange ) prime++;
-    	            } 
-    	        } 
-    	        if(prime == 2) sum += startingrange;
-    	    } 
-    	    System.out.print(sum);
-
+    	    // Go through this for simpler logic 
+    	    SimpleLogic(startingrange, endingrange);
+    	    
+    	    // Go through this for faster and complex logic
+    	    // FasterLogic(startingrange, endingrange);    // uncomment this to get the faster answer
+    	    
 	    } catch(Exception e) {
 	        System.out.print("Exception Occured : " + e);
 	    }
-	    
-	    
 	}
+	
+	public static void SimpleLogic(int startingrange, int endingrange){
+	    
+    	    int sum = 0;     // To store the sum of the prime Numbers
+    	    
+    	    for( int i = startingrange+1 ; i < endingrange ; i++ ){
+    	        
+    	        int count = 0;
+    	        
+    	        for(int j = 1 ; j <= i ; j++ ){
+    	            if( i % j == 0 ) count++;
+    	        }
+    	        
+    	        if( count == 2 ) sum+=i;
+    	        
+    	    }
+    	    
+    	    System.out.print(sum);
+	}
+	
+	public static void FasterLogic(int startingrange, int endingrange){
+	    
+	    int sum = 0; // To store the sum of the prime numbers
+        
+        // Loop through the numbers between startingrange and endingrange
+        for (int i = startingrange + 1; i < endingrange; i++) {
+            
+            // Check if the number is prime
+            boolean isPrime = true;
+            
+            if (i == 1) {
+                isPrime = false;
+            } else {
+                
+                // Cutting down the for loop into half to get the prime numbers more faster
+                for (int j = 2; j <= Math.sqrt(i); j++) {
+                    
+                    if (i % j == 0) {
+                        isPrime = false;
+                        break;
+                    }
+                    
+                }
+                
+            }
+            
+            // If the number is prime, add it to the sum
+            if (isPrime) {
+                sum += i;
+            }
+            
+        }
+        
+        // Print the result
+        System.out.print(sum);
+	}
+	
+	
 }
