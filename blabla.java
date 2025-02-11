@@ -14,7 +14,7 @@ for (int i = startingRange; (step == 1) ? i <= endingRange : i >= endingRange; i
     // Print the value of i * 5, handling negative numbers with parentheses     |
     //                                                                          |
     //                                             Print a comma and space unless it's the last number
-
+    
 }
 
 // This logic is for a single loop for both ranges from low to high and high to low

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 // GCD of given three numbers
 
-class Main
+class QuestionFive
 {
     
     static Scanner scan = new Scanner(System.in);

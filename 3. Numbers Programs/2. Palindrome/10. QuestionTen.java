@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // Adding all alternative Palindromes in a given range 
-class Main 
+class QuestionTen
 {
     
     static Scanner scan = new Scanner(System.in);

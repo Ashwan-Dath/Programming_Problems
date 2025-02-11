@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 // Print first 'n' Numbers in the Arithmetic progression series
 
-class QuestionEigth
+class QuestionEight
 {
     
     static Scanner scan = new Scanner(System.in);
