@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 // Incomplete
 
-class Main
+class QuestionEight
 {
     
     static Scanner scan = new Scanner(System.in);

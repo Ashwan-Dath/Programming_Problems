@@ -1,90 +1,7 @@
-	public static boolean ValidBinary(String number){
-	    for(int i=0; i<number.length(); i++){
-	        if(number.charAt(i) == '0' || number.charAt(i) == '1');
-	        else return false;
-	    }
-	    return true;
-	}
-	
-	
-	public static String ReverseString(String number){
-	    String temp = "";
-	    for(int i = number.length()-1; i>=0;i--){
-	        temp = temp+number.charAt(i);
-	    }
-	    return temp;
-	}
-	
-	
-	public static int BinaryToDecimal(String number){
-	    int dec = 0;
-        for (int i = 0 ; i < number.length() ; i++ ){
-            char dup = number.charAt(i);
-            if(dup=='0');
-            else{
-                dec = (dec + (int)Math.pow(2, i));
-            }
-        }   
-        
-        return dec;
-
-	}
-	
-	public static String DecimalToOctal(int number){
-        String octalNumer = "";
-
-        while(true){
-            
-            int remainder = number % 8;
-            number /= 8;
-            
-            octalNumer = remainder+octalNumer;
-            if(number==0) break;
-        }
-        return octalNumer;
-	}
-
-
-
-	public static String DecimalToHexaDecimal(int number){
-	    String hexaDecimalNumber = "";
-	    
-        while(true){
-            
-            int remainder = number%16;
-            // Getting the Remainder when divided with 2
-            
-            number /= 16;
-            
-            if( remainder >= 10 ){
-                if(remainder == 10) hexaDecimalNumber = "A"+hexaDecimalNumber;
-                else if(remainder == 11) hexaDecimalNumber = "B"+hexaDecimalNumber;
-                else if(remainder == 12) hexaDecimalNumber = "C"+hexaDecimalNumber;
-                else if(remainder == 13) hexaDecimalNumber = "D"+hexaDecimalNumber;
-                else if(remainder == 14) hexaDecimalNumber = "E"+hexaDecimalNumber;
-                else hexaDecimalNumber = "F"+hexaDecimalNumber;
-            }
-            else hexaDecimalNumber = remainder+hexaDecimalNumber;
-            //  Adding remainder to the final binaryNumber (String).
-            
-            
-            if(number==0) break;
-           // if the decimalNumber reaches to 0 while dividing with 2 then we are breaking the loop.
-           
-        }
-        return hexaDecimalNumber;
-	}
-
-
-
-
-
-
-
 import java.util.Scanner;
 
 // Convert the Binary Number To hexa Decimal Number
-public class Main
+class BinToHex
 {
     static Scanner scan = new Scanner(System.in);
     
@@ -190,53 +107,29 @@ public class Main
         Answer();
 	}
 	
-    public static String[] remove(String[] arr, int in) {
-
-        if (arr == null || in < 0 || in >= arr.length) {
-            return arr;
-        }
-
-          String[] arr2 = new String[arr.length - 1];
-
-        // Copy the elements except the index
-        // from original array to the other array
-        for (int i = 0, k = 0; i < arr.length; i++) {
-            if (i == in)
-                continue;
-            
-              arr2[k++] = arr[i];
-        }
-
-        return arr2;
-    }
-
-
 	public static void Answer(){
 	    
 	    try {
 	        
+	        String binaryNumber = scan.nextLine();
 	        
-	        String[] numberSystem = {"Binary", "Decimal", "Octal", "HexaDecimal"};
-	        System.out.println("From which number system do you want to convert the number? ");
-	        for (int i = 0; i< numberSystem.length ; i++ ){
-	            System.out.println( i + 1 + ". " + numberSystem[i]);
-	        } 
-	        
-	        System.out.println("Enter the Option Number : ");
-	        int a = scan.nextInt();
-	        
-	        numberSystem = remove(numberSystem, a-1);
-	        
-	        System.out.println("To which number system do you want to convert the number? ");
-            for (int i = 0; i< numberSystem.length ; i++ ){
-	            System.out.println( i + 1 + ". " + numberSystem[i]);
+	        if(!ValidBinary(binaryNumber)){
+	            System.out.print("Invalid InPut.");
+	            return;
 	        }
+	        
+	       // System.out.print("Decimal Number of "+binaryNumber+" is : ");
+	        
+	        String reversedNumber = ReverseString(binaryNumber);
+	        
+	        int decimalNumber = BinaryToDecimal(reversedNumber);
+	        
+	        System.out.println(decimalNumber);
+	        
+	        String hexaDecimalNumber = DecimalToHexaDecimal(decimalNumber);
+	        
+	        System.out.print(hexaDecimalNumber);
 
-	        System.out.println("Enter the Option Number : ");
-	        int b = scan.nextInt();
-	        
-	        
-	        
 	    } catch(Exception e) {
 	        System.out.print("Error Occured : "+ e);
 	    }
@@ -246,14 +139,6 @@ public class Main
 	public static boolean ValidBinary(String number){
 	    for(int i=0; i<number.length(); i++){
 	        if(number.charAt(i) == '0' || number.charAt(i) == '1');
-	        else return false;
-	    }
-	    return true;
-	}
-	
-	public static boolean ValidHexaDecimal(String number){
-	    for(int i=0; i<number.length(); i++){
-	        if(number.charAt(i) == '0' || number.charAt(i) == '1' || number.charAt(i) == 'a' || number.charAt(i) == 'A' || number.charAt(i) == 'b' || number.charAt(i) == 'B' || number.charAt(i) == 'c' || number.charAt(i) == 'C' || number.charAt(i) == 'd' || number.charAt(i) == 'D' || number.charAt(i) == 'e' || number.charAt(i) == 'E' || number.charAt(i) == 'f' || number.charAt(i) == 'F');
 	        else return false;
 	    }
 	    return true;
@@ -312,3 +197,4 @@ public class Main
         return hexaDecimalNumber;
 	}
 }
+

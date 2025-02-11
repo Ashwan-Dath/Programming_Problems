@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 // Avg of Alternative Prime numbers
-// QuestionSeven
-class Main 
+
+class QuestionSeven 
 {
     
     static Scanner scan = new Scanner(System.in);

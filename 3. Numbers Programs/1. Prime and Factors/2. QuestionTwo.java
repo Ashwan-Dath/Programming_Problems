@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 // Find given numbers is prime or not
-class Main 
+class QuestionTwo 
 {
     
     static Scanner scan = new Scanner(System.in);
