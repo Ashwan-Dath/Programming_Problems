@@ -18,3 +18,9 @@ for (int i = startingRange; (step == 1) ? i <= endingRange : i >= endingRange; i
 }
 
 // This logic is for a single loop for both ranges from low to high and high to low
+
+
+int a = 10;
+int b = 20;
+a = a + b - ( b = a);
+System.out.print(a+" "+b);
