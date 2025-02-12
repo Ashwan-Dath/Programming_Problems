@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main
 {
+    
     static Scanner scan = new Scanner(System.in);
     
 	public static void main(String[] args) {
@@ -11,7 +12,6 @@ public class Main
 	public static void Answer(){
 	    
 	    try {
-	        
 	        
 	        String[] numberSystem = {"Binary", "Decimal", "Octal", "HexaDecimal"};
 	        System.out.println("From which number system do you want to convert the number? ");
@@ -32,8 +32,8 @@ public class Main
 	        System.out.print("Enter the Option Number : ");
 	        int optionTwo = scan.nextInt();
 	        
-	        FirstOption(optionOne, optionTwo);
-
+	        if(optionOne>0 && optionOne<= 4 && optionTwo>0 && optionTwo<=3) FirstOption(optionOne, optionTwo);
+	        else System.out.print("Invalid Option.");
 
 	    } catch(Exception e) {
 	        System.out.print("Error Occured : "+ e);
@@ -46,7 +46,10 @@ public class Main
             
             System.out.print("Enter the Binary Number to convert : ");
             String bin = scan.next();
-	        String[] numberSystem = {"Decimal", "Octal", "HexaDecimal"};
+            if(!ValidBinary(bin)){
+                System.out.println("Invalid Binary Number Input.");
+                return;
+            }
 
 	        int dec = BinaryToDecimal(bin);
 	        
@@ -70,8 +73,12 @@ public class Main
 
             System.out.print("Enter the Decimal Number to convert : ");
             int dec = scan.nextInt();
-	        String[] numberSystem = {"Binary", "Octal", "HexaDecimal"};
-
+            
+            if(!ValidDecimal(dec)){
+                System.out.print("Invalid Decimal Input.");
+                return;
+            }
+            
 	        if(optionTwo == 1){
 	            String bin = DecimalToBinary(dec);
 	           // System.out.print(bin);
@@ -93,7 +100,11 @@ public class Main
             System.out.print("Enter the Octal Number to convert : ");
             int oct = scan.nextInt();
 	        
-	        String[] numberSystem = {"Binary", "Decimal", "HexaDecimal"};
+	        if(!ValidOctal(oct)){
+	            System.out.print("Invalid Octal Number Input.");
+	            return;
+	        }
+	        
             int dec = OctalToDecimal(oct);
 	        
 	        if(optionTwo == 1){
@@ -115,9 +126,11 @@ public class Main
 
             System.out.print("Enter the Hexa Decimal Number to convert : ");
             String hex = scan.next();
+            if(!ValidHexaDecimal(hex)){
+                System.out.println("Invalid HexaDecimal Number Input.");
+                return;
+            }
             
-	        String[] numberSystem = {"Binary", "Decimal", "Octal"};
-
             int dec = HexaDecimalToDecimal(hex);
 	        
 	        if(optionTwo == 1){
@@ -167,9 +180,45 @@ public class Main
 	    return true;
 	}
 	
+	public static boolean ValidDecimal(int number){
+	    
+	    if(number<0) number = -(number);
+	    
+	    while(true){
+	        
+	        int a = number % 10;
+	        number /= 10;
+	        if( a >= 0 && a <= 9 );
+	        else return false;
+	        
+	        if(number == 0) break;
+	        
+	    }
+	    
+	    return true;
+	}
+	
+	public static boolean ValidOctal(int number){
+	    
+	    if(number<0) number = -(number);
+	    
+	    while(true){
+	        int a = number % 10;
+	        
+	        number /= 10;
+	        
+	        if(a>=0 && a<=7);
+	        else return false;
+	        
+	        if(number == 0) break;
+	        
+	    }
+	    return true;
+	}
+	
 	public static boolean ValidHexaDecimal(String number){
 	    for(int i=0; i<number.length(); i++){
-	        if(number.charAt(i) == '0' || number.charAt(i) == '1' || number.charAt(i) == 'a' || number.charAt(i) == 'A' || number.charAt(i) == 'b' || number.charAt(i) == 'B' || number.charAt(i) == 'c' || number.charAt(i) == 'C' || number.charAt(i) == 'd' || number.charAt(i) == 'D' || number.charAt(i) == 'e' || number.charAt(i) == 'E' || number.charAt(i) == 'f' || number.charAt(i) == 'F');
+	        if(number.charAt(i) == '0' || number.charAt(i) == '1' || number.charAt(i) == '2' || number.charAt(i) == '3' || number.charAt(i) == '4' || number.charAt(i) == '5' || number.charAt(i) == '6' || number.charAt(i) == '7' || number.charAt(i) == '8' || number.charAt(i) == '9' || number.charAt(i) == 'a' || number.charAt(i) == 'A' || number.charAt(i) == 'b' || number.charAt(i) == 'B' || number.charAt(i) == 'c' || number.charAt(i) == 'C' || number.charAt(i) == 'd' || number.charAt(i) == 'D' || number.charAt(i) == 'e' || number.charAt(i) == 'E' || number.charAt(i) == 'f' || number.charAt(i) == 'F');
 	        else return false;
 	    }
 	    return true;
@@ -261,8 +310,7 @@ public class Main
         return binaryNumber;
 	}
 	
-	public static int BinaryToDecimal(String number) {
-
+	public static int BinaryToDecimal(String number){
         int dec = 0;
         number = ReverseString(number);
         for (int i = 0 ; i < number.length() ; i++ ){
@@ -273,6 +321,7 @@ public class Main
                 dec = dec + (int)Math.pow(2, i);
             }
         }   
+            
         return dec;
 
 	}
@@ -324,7 +373,5 @@ public class Main
 	    return dec;
 
 	}
-	
-
 	
 }
