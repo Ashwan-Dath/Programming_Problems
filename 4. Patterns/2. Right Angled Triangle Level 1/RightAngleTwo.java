@@ -1,19 +1,19 @@
 import java.util.Scanner;
 
-class RightAngleOne
+class RightAngleTwo
 {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String [] args){
 	    
-        // Question :  Write a Program to Print the Following Pattern?
+        // Description : Write a Program to Print the Following Pattern?
         
         // If Input is 5 then Print
         
-        // *         
-        // * *        
-        // * * *         
-        // * * * *    
+        //         *
+        //       * *
+        //     * * *
+        //   * * * *
         // * * * * *
         
         
@@ -27,10 +27,10 @@ class RightAngleOne
         // Input 1  :    5
         // Output 1: 
         
-        // *             
-        // * *         
-        // * * *      
-        // * * * *   
+        //         *
+        //       * *
+        //     * * *
+        //   * * * *
         // * * * * *
         
          
@@ -43,6 +43,8 @@ class RightAngleOne
         // Explanation:
         // Print the Following Right angle Triangle Pattern by taking Given Integer Value.
         
+        
+                
         
         
         Answer();
@@ -60,9 +62,14 @@ class RightAngleOne
 	        return;
 	    }
 	    
-	    for (int i = 1; i <= row ; i++ ){
-	        for(int j =1 ; j <= i; j++) System.out.print("*");
-	        System.out.println();
+	    for (int i = 1; i <= row ; i++ ){ 
+
+	        for(int j =1 ; j <= row; j++){ 
+                if( row - i < j ) System.out.print("* ");
+                else System.out.print("  ");
+            } 
+	        System.out.println(); 
+
 	    } 
 	    
 	}
