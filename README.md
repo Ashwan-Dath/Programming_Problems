@@ -21,10 +21,20 @@ This Repository is all about the problems and its explanation by ME.
 		iii. Level 3  - Contains 10 Problems
 
 	3. Numbers Programs
-		  i. Prime and Factors	- Contains 10 Problems
-		 ii. Palindrome			- Contains 10 Problems
-		iii. Armstrong			- Contains 10 Problems
-	
+		  i. Prime and Factors	 	- Contains 10 Problems
+		 ii. Palindrome				- Contains 10 Problems
+		iii. Armstrong				- Contains 10 Problems
+		 iv. Mathematical Programs 	- Contains 13 Problems
+		  v. Number Conversions		- Contains  7 Problems
+		 vi. Number Programs		- Contains  1 Problems
+
+	4. Patterns
+		  i. Rectangle Patterns		- Contains 10 Problems
+		 ii. Right Angled Triangle	- Contains  5 Problems
+		iii. Triangle Patterns		- Contains  x Problems 	**
+
+
+Note: ** means currently doing
 
 
 
