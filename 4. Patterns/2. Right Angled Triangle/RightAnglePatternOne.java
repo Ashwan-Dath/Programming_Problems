@@ -4,7 +4,8 @@ class RightAnglePatternOne
 {
     static Scanner scan = new Scanner(System.in);
 
-    public static void main(String [] args){
+    public static void mainnn(String [] args){
+    // public static void main(String [] args){
 	    
         // Question : Write a Program to Print the Following Pattern?
 
@@ -18,15 +19,15 @@ class RightAnglePatternOne
 
 
         // Constraints:
-        // Input          :- First Line of Input Consists of One Integer Value ( Rows ).
-        // Output        :- Print the Given Pattern.
+        // Input        :- First Line of Input Consists of One Integer Value ( Rows ).
+        // Output       :- Print the Given Pattern.
         // Constraints  :- If Given Input Value is Zero then Print Invalid Input.
-        //                     If Given Input Value is Negative then convert that value to Positive and then Print Following Pattern.
+        //               If Given Input Value is Negative then convert that value to Positive and then Print Following Pattern.
 
 
         // Example:
         // Input 1  :    5
-        // Output 1: 
+        // Output 1 : 
 
         // 1
         // 3*2
@@ -35,9 +36,8 @@ class RightAnglePatternOne
         // 11*12*13*14*15
 
         
-
         // Input 2  :    -8
-        // Output 2: 
+        // Output 2 : 
 
         // 1
         // 3*2
@@ -59,7 +59,8 @@ class RightAnglePatternOne
 	}
 	
 	
-	public static void Answer(){
+	// public static void Answer(){
+	public static void main(String[] args){
 
         int row = scan.nextInt();
 
@@ -72,14 +73,21 @@ class RightAnglePatternOne
 
         int k = 0;
         int temp = 0;
+        
         for( int i = 1; i <= row ; i++ ){
-            temp = k+i;
+
+            if(i%2==0) temp = k+i;
+
             for(int j = 1; j <= i ; j++ ){
-                System.out.print(temp-- +" ");
+                if(i%2==1) System.out.print(temp++ + " ");
+                else System.out.print(temp-- +" ");
             }
+
             k = k+i;
             System.out.println();
+
         }
+
 	}
 	
 	
