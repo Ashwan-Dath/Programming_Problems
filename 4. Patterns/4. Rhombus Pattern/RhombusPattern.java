@@ -45,9 +45,11 @@ public class RhombusPattern
 	    Scanner scan = new Scanner(System.in);	    
 	    
 	    int range = scan.nextInt();
-	    
+	    scan.close();
+
 	    if(range <= 0){ 
 	        System.out.print("Invalid Input."); 
+            
 	        return;
 	    }
         
@@ -69,6 +71,5 @@ public class RhombusPattern
             System.out.println(); 
         }
 
-	    
 	}
 }
