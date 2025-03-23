@@ -77,26 +77,29 @@ public class SwappingValues {
         for(int i = 0; i < Length; i++)
             arr[i] = scan.nextInt();
 
-                    // Input 2 :        8
-        //                     65 11 27 31 86 5 93 62
-        // Output 2 :     Before Swapping - 65 11 27 31 86 5 93 62
-        //                After Swappinng - 11 65 31 27 5 86 62 93
-        // Explanation :
+        System.out.print("Before Swapping -");
 
-        System.out.println("Before Swapping -");
         for(int i = 0; i < Length; i++)
-        System.out.print(" "+arr[i]);
+            System.out.print(" "+arr[i]);
         
-        System.out.println("After Swappinng -");
-        for(int i = 0; i < Length; ){
-            if(i!=Length){
+        System.out.print("\nAfter Swappinng - ");
+
+        for(int i = 0; i < Length; i++){
+
+            if( i % 2 == 0 && i == Length-1){
+                System.out.print(arr[i]);
+                break;
+            }else if(i % 2 == 0){
                 int dup = arr[i];
                 arr[i] = arr[i+1];
                 arr[i+1] = dup;
-                System.out.print(" "+arr[i]);
-                i+=2;
+                System.out.print(arr[i]+" ");
+            }else{
+                System.out.print(arr[i]+" ");
             }
+
         }
+
         scan.close();
 
     }
