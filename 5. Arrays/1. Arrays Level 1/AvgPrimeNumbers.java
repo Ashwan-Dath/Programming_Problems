@@ -47,10 +47,22 @@ public class AvgPrimeNumbers {
         Scanner scan = new Scanner(System.in);
 
         int Length = scan.nextInt();
+        
+        if(Length < 4){
+            scan.close();
+            System.out.print("Invalid Array Size.");
+            return;
+        }
         int arr[] = new int[Length];
 
-        for(int i = 0; i < Length; i++)
+        for(int i = 0; i < Length; i++){
             arr[i] = scan.nextInt();
+            if(arr[i]<1){
+                System.out.print("Invalid Array Elements");
+                scan.close();
+                return;
+            }
+        }
         
         scan.close();
 
@@ -69,6 +81,10 @@ public class AvgPrimeNumbers {
                 sum += arr[i];
                 count++;
             }
+        }
+        if(count == 0){
+            System.out.print("No Prime Numbers!");
+            return;
         }
 
         System.out.printf("Average of Prime Numbers in a Given Array Elements is %.3f.",((float)sum/count));
