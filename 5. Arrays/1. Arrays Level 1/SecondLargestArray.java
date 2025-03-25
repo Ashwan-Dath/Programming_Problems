@@ -54,13 +54,13 @@ public class SecondLargestArray {
     // }
 
     public static void main(String[] args) {
+        
         // Question : Write a Program to Find the Second Largest Element in an Given
         // Array ?
 
         // Constraints:
         // Input : First Line of Input Consists of One Integer Value (Array Size).
-        // Second Line of Input Consists of few Integer Values Separated by Space (Array
-        // Elements).
+        // Second Line of Input Consists of few Integer Values Separated by Space (Array Elements). 
         // Output : Print the Second Largest element/value in the Array Elements.
 
         // Constraints : Array Size must be Greater than 2 or else Print "Invalid Array
@@ -110,6 +110,5 @@ public class SecondLargestArray {
         formalFinding(arr);
         // sorting(arr);
         scan.close();
-
     }
 }
