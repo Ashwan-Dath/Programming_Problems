@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class RemoveDuplicates {
 
     public static int[] removeDuplicates(int arr[]){
-    // public static void removeDuplicates(int arr[]){
 
         int count = 0;
 
