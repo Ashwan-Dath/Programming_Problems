@@ -1,4 +1,4 @@
-package Programming_Problems.OperatorsPrograms;
+package  OperatorsPrograms;
 
 public class ConditionalOperators {
 	public static void main(String[] args) {

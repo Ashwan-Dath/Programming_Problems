@@ -1,4 +1,4 @@
-package Programming_Problems.BasicPrograms.Level3;
+package  BasicPrograms.Level3;
 
 import java.util.Scanner;
 
