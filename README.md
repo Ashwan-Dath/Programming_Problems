@@ -1,19 +1,19 @@
 # Programming_Problems
 This Repository is all about the problems and its explanation by ME.
 
-->  This is a Challenge, doing 1 program everyday from starting Basics to the Advanced, to learn with me and anyone out there can reach and see my content.
+->  This is a Challenge, doing 1 program every day from starting Basics to the Advanced, to learn with me and anyone out there can reach and see my content.
 
 
 	This Program Contains 
 	
 	1. Operators Programs
 	
-		  i. AssignmentOperators
-		 ii. MathematicalOperator ( Arithmetic Operators )
-		iii. UnaryOperator
-		 iv. RelationalOperator
-		  v. ConditionalOperators
-		 vi. BitwiseANDBitShiftOperators
+		  i. Programming_Problems.OperatorsPrograms.AssignmentOperators
+		 ii. Programming_Problems.OperatorsPrograms.MathematicalOperator ( Arithmetic Operators )
+		iii. Programming_Problems.OperatorsPrograms.UnaryOperator
+		 iv. Programming_Problems.OperatorsPrograms.RelationalOperator
+		  v. Programming_Problems.OperatorsPrograms.ConditionalOperators
+		 vi. Programming_Problems.OperatorsPrograms.BitwiseANDBitShiftOperators
 
 	2. Basic Programs
 		  i. Level 1  - Contains 10 Problems
@@ -38,7 +38,7 @@ Note: ** means currently doing
 
 
 
-All the above mentioned are be done in JAVA programming language if i have time i will try to do it in Python, JavaScript.
+All the above-mentioned are be done in JAVA programming language if I have time I will try to do it in Python, JavaScript.
 
 
 Disclaimer: 
