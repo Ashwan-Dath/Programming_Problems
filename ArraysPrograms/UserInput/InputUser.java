@@ -1,6 +1,5 @@
-package UserInput;
+package ArraysPrograms.UserInput;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputUser {

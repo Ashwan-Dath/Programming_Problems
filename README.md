@@ -35,7 +35,7 @@ This Repository is all about the problems and its explanation by ME.
 		 iv. Patterns.RhombusPattern		- Contains 2 Problems
 
 	5. Arrays
-		  i. Arrays.ArraysLevel1			- Contains 23 Problems
+		  i. Arrays.ArraysLevel 1			- Contains 23 Problems
 		 ii. Search							- Contains ** Problems
 
 
