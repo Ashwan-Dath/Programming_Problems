@@ -1,4 +1,4 @@
-package  Arrays.ArraysLevel1;
+package  ArraysPrograms.ArraysLevel1;
 
 import java.util.Scanner;
 import java.util.Arrays;

@@ -1,20 +1,22 @@
-package  Arrays.ArraysLevel1;
+package  ArraysPrograms.ArraysLevel1;
 
 import java.util.Scanner;
 
-public class RightRotate {
+public class LeftRotate {
     
-        public static int[] shiftingArray(int []arr){ 
+    public static int[] shiftingArray(int []arr){ 
 
-        int dup = arr[arr.length-1]; 
+        int dup = arr[0]; 
 
-        for(int i = arr.length-1; i >= 0 ; i--){
-            if(i == 0){
-                arr[i] = dup;
-            }else{
-                arr[i] = arr[i-1];
-            }
-        }
+        for(int i = 0; i < arr.length; i++){ 
+        
+            if(i == arr.length-1){ 
+                arr[i] = dup; 
+            }else{ 
+                arr[i] = arr[i+1]; 
+            } 
+        } 
+
         return arr;
     } 
 
@@ -30,20 +32,20 @@ public class RightRotate {
         // Input 1 :        9
         //                  5 8 9 13 15 28 3 47 56
         // Output 1 :    The Given Array is : 5 8 9 13 15 28 3 47 56
-        //               Left Rotated Array : 56 5 8 9 13 15 28 3 47
+        //               Left Rotated Array : 8 9 13 15 28 3 47 56 5
         // Explanation :
         // Here Left rotating the values for 1 index value forware like
-        // 5 8 9 13 15 28 3 47 56 -->  56 5 8 9 13 15 28 3 47
+        // 5 8 9 13 15 28 3 47 56 --> 8 9 13 15 28 3 47 56 5
         //          |                           |
         //     Given Array              Left rotated array (Shifted 1 index to the left)
         
         // Input 2 :       5
         //                 8 2 7 54 89
         // Output 2 :   The Given Array is : 8 2 7 54 89
-        //              Left Rotated Array : 89 8 2 7 54
+        //              Left Rotated Array : 2 7 54 89 8
         // Explanation :
         // Here Left rotating the values for 1 index value forware like
-        //      8 2 7 54 89      -->     89 8 2 7 54
+        //      8 2 7 54 89      -->     2 7 54 89 8
         //          |                           |
         //     Given Array              Left rotated array (Shifted 1 index to the left)
         
@@ -58,8 +60,6 @@ public class RightRotate {
         for(int i = 0; i < Length; i++)
             arr[i] = scan.nextInt();
 
-        scan.close();
-
         arr = shiftingArray(arr);
 
         for(int i = 0; i< arr.length; i++)
@@ -67,5 +67,3 @@ public class RightRotate {
     }
 
 }
-
-

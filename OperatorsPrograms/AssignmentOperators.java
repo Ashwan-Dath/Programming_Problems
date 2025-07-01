@@ -92,7 +92,7 @@ public class AssignmentOperators
 
         int aaa = 10;
         int bbb = 5;
-        System.out.println(" aaa += bbb -= 2 * 4 => "+ ( aaa += bbb -= 2 * 4) );  
+        System.out.println(" aaa += bbb -= 2 * 4 => "+ ( aaa += bbb -= 2 * 4 ) );  
         System.out.println("Value of aaa : "+ aaa);
         System.out.println("Value of bbb : "+ bbb);
         //  Here the calculation is evaluated as 
