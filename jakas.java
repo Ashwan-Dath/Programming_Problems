@@ -466,3 +466,7 @@ class GFG {
                                + " is not a Neon number");
     }
 }
+
+
+
+this is a new edit of the code after the ending of the day feels like tired and. didn't wanted to go the timing of the day shift making me feel like I didn't finished my thing's 
