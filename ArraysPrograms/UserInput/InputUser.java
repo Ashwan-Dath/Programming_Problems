@@ -52,6 +52,10 @@ public class InputUser {
         return arr;
     }
 
+    public static int singleIntegerInput(){
+        return sc.nextInt();
+    }
+
     public  static String[] StringArrayInput(){
         System.out.print("Enter the Size of the Array : ");
         int size = sc.nextInt();
