@@ -38,38 +38,38 @@ public class SortedArray {
     }
 
     public static void main(String [] args){
-        // Question : Check if an array is sorted (in ascending or descending order).
+        // Question : Check if an array is sorted (in ascending or descending order). 
 
-        // Constraints:
-        // Input : First Line of Input Consists of One Integer Value (Array Size).
+        // Constraints: 
+        // Input : First Line of Input Consists of One Integer Value (Array Size). 
         //         Second Line of Input Consists of few Integer Values Separated by Space (Array Elements). 
-        // Output : Print the Array is Sorted or Not.
+        // Output : Print the Array is Sorted or Not. 
 
-        // Constraints :
-        //      Array Size must be Greater than 3 or else Print "Invalid Array Size.".
-        //      If the Given Array is sorted print "The Given array is in sorted".
-        //      If the Given Array is not sorted print "The Given array is not sorted".
+        // Constraints : 
+        //      Array Size must be Greater than 3 or else Print "Invalid Array Size.". 
+        //      If the Given Array is sorted print "The Given array is in sorted". 
+        //      If the Given Array is not sorted print "The Given array is not sorted". 
 
 
-        // Explanation:
-        // Input 1 : 6 - Length of the Array
-        //           2 20 21 54 67 78 - Elements
-        // Output 1 : The Given array is sorted in Ascending order.
+        // Explanation: 
+        // Input 1 : 6 - Length of the Array 
+        //           2 20 21 54 67 78 - Elements 
+        // Output 1 : The Given array is sorted in Ascending order. 
         // Explanation :
-        //  2 < 20 < 21 < 54 < 67 < 78 - The Given array is sorted in Ascending order.
+        //  2 < 20 < 21 < 54 < 67 < 78 - The Given array is sorted in Ascending order. 
 
 
-        // Input 2 : 4 - Length of the Array
-        //           55 24 13 11 - Elements
-        // Output 2 : The Given array is sorted in Descending order.
-        // Explanation :
-        // 55 > 24 > 13 > 11 - The Given array is sorted in Descending order.
+        // Input 2 : 4 - Length of the Array 
+        //           55 24 13 11 - Elements 
+        // Output 2 : The Given array is sorted in Descending order. 
+        // Explanation : 
+        // 55 > 24 > 13 > 11 - The Given array is sorted in Descending order. 
         
-        // Input 3 : 5 - Length of the Array
-        //            12 34 2 43 1 - Elements
-        // Output 2 : The Given array is not sorted.
-        // Explanation :
-        // 12 < 34 > 2 < 43 > 1 - The Given array is not sorted.
+        // Input 3 : 5 - Length of the Array 
+        //            12 34 2 43 1 - Elements 
+        // Output 2 : The Given array is not sorted. 
+        // Explanation : 
+        // 12 < 34 > 2 < 43 > 1 - The Given array is not sorted. 
 
         Scanner scan = new Scanner(System.in);
 

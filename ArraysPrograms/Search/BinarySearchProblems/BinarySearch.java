@@ -1,4 +1,4 @@
-package ArraysPrograms.Search;
+package ArraysPrograms.Search.BinarySearchProblems;
 
 import java.util.Scanner;
 
@@ -23,9 +23,11 @@ public class BinarySearch {
         // searching(nums, k);
         int index = arrayAgnosticBinarySearch(nums, k);
         System.out.printf("The Target is present at index %d", index);
+
     }
 
     public static int searching(int arr[], int k){
+
         int start = 0;
         int end = arr.length-1;
         while(start < end){
@@ -50,9 +52,12 @@ public class BinarySearch {
 
         }
         return -1;
+
     }
 
+    // If we don't know the array is in ascending order or descending order
     public static int arrayAgnosticBinarySearch(int arr[], int target){
+
         boolean isAsc = arr[0] < arr[arr.length - 1];
 
         int start = 0;
@@ -60,7 +65,7 @@ public class BinarySearch {
 
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            System.out.println("mid "+ mid);
+            // System.out.println("mid "+ mid);
 
             if(arr[mid] == target){
                 return mid;
