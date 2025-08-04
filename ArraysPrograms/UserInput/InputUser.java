@@ -52,9 +52,26 @@ public class InputUser {
         return arr;
     }
 
+    public static char[] CharacterArrayInput(){
+        System.out.print("Enter the Size of the Array : ");
+        int size = sc.nextInt();
+
+        char []arr =  new char[size];
+        for(int i = 0; i < size; i++){
+            System.out.printf("Enter the %d element in the Array : ", (i + 1));
+            arr[i] = sc.next().charAt(0);
+        }
+        return arr;
+    }
+
     public static int singleIntegerInput(){
         System.out.print("Enter the Target Number : ");
         return sc.nextInt();
+    }
+    
+    public static char singleCharacterInput(){
+        System.out.print("Enter the Target Character : ");
+        return sc.next().charAt(0);
     }
 
     public  static String[] StringArrayInput(){
