@@ -25,27 +25,27 @@ public class FirstLastTarget {
         int arr[] = InputUser.IntegerArrayInput();
         int target = InputUser.singleIntegerInput();
 
-        // ArrayList<Integer> index = MySolution(arr, target);
+        ArrayList<Integer> index = MySolution(arr, target);
 
-        // if(index.size() > 1)
-        //     System.out.printf("The Target is present from %d to %d index in the given array.",index.get(0),index.get(index.size() - 1));
-        // else
-        //     System.out.printf("The Target is present at %d index in the given array.",index.get(0));
+        if(index.size() > 1)
+            System.out.printf("The Target is present from %d to %d index in the given array.",index.get(0),index.get(index.size() - 1));
+        else
+            System.out.printf("The Target is present at %d index in the given array.",index.get(0));
             
             
-        // int []res = LittleOptimisedSolution(arr, target);
-        
-        // if(res.length > 1)
-        //     System.out.printf("The Target is present from %d to %d index in the given array.",res[0],res[res.length - 1]);
-        // else
-        //     System.out.printf("The Target is present at %d index in the given array.",res[0]);
-
-        int []res = OptimisedSolution(arr, target);
+        int []res = LittleOptimisedSolution(arr, target);
         
         if(res.length > 1)
             System.out.printf("The Target is present from %d to %d index in the given array.",res[0],res[res.length - 1]);
         else
             System.out.printf("The Target is present at %d index in the given array.",res[0]);
+
+        int []ress = OptimisedSolution(arr, target);
+        
+        if(ress[0] != -1)
+            System.out.printf("The Target is present from %d to %d index in the given array.",ress[0],ress[ress.length - 1]);
+        else
+            System.out.printf("The Target is not present in the given array.");
     }
 
 
@@ -121,21 +121,17 @@ public class FirstLastTarget {
 
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            System.out.println(findingFirstIndex + "Value of mid" + mid);
 
             if(target < arr[mid])
                 end = mid - 1;
             else if(target > arr[mid])
                 start = mid + 1;
             else{
-                System.out.println("Entered Else"+ findingFirstIndex + "mid" + mid + "start" + start + "end" + end);
                 ans = mid;
                 if(findingFirstIndex){
-                    System.out.println("Entered If");  
                     end = mid - 1;
                 }
                 else{
-                    System.out.println("Entered else");  
                     start = mid + 1;
                 }
             }
