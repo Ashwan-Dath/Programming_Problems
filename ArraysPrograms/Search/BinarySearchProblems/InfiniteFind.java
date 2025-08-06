@@ -26,15 +26,66 @@ public class InfiniteFind {
         int arr[] = InputUser.IntegerArrayInput();
         int target = InputUser.singleIntegerInput();
 
-        int index = MySolution(arr, target);
-
-        System.out.printf("The Target Present At Index %d in the Given Array",index);
-        // int index = recursiveMethod(arr, target, 2, 6);
-
+        // int index = MySolution(arr, target);
+        
         // System.out.printf("The Target Present At Index %d in the Given Array",index);
-
+        // int index = recursiveMethod(arr, target, 2, 6);
+        
+        // System.out.printf("The Target Present At Index %d in the Given Array",index);
+        
+        int OptimisedIndex = LearntNewWritingCode(arr, target);
+        
+        System.out.printf("The Target Present At Index %d in the Given Array",OptimisedIndex);
     }
 
+    // Learnt New Solution in the same way but writing code is little bit different
+    // In this method i am only checking that array where my target will present because
+    // i am checking the arr[end] will be greater than target. That is where we find our target 
+    // present in the 
+    public static int LearntNewWritingCode(int []arr, int target){
+        // Imagining the start and end will be of the size of 2.
+        int start = 0;
+        int end = 1;
+
+        // Checking whether the given element is greater than the end means 
+        // the target will be present in the infinite array or else the
+        // target will not present in the array.
+        while(target > arr[end]){
+            // Moving start to the forward of the end to move the searching values.
+            int tempStart = end + 1;
+            // Doubling the box size for every loop
+            end = end + (end - start + 1) * 2;
+            start = tempStart;
+        }
+
+        return findTargetIndex(arr, target, start, end);
+    }
+
+    public static int findTargetIndex(int []arr, int target, int start, int end){
+        while (start <= end) {
+
+            int mid = start + (end - start) / 2;
+
+            if(target < arr[mid]){
+                end = mid - 1;
+            }else if (target > arr[mid]){
+                start = mid + 1;
+            }else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+
+
+
+
+
+
+    // My Logic I created the solution.
+    // In this logic i am always running binary search for every array i created
+    // But the above code only runs the binary search only when the target is present in the 
     public static int MySolution(int arr[], int target){
 
         int start = 0;
