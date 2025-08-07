@@ -9,7 +9,7 @@ public class BinarySearch {
         //  Binary Search To find value        
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter the size of the array : ");
+        System.out.printf("\nEnter the size of the array : ");
         int size = scan.nextInt();
 
         int nums[] = new int[size];
@@ -17,6 +17,7 @@ public class BinarySearch {
         for(int i = 0; i < size; i++)
             nums[i] = scan.nextInt();
 
+        System.out.print("Enter the Target value : ");
         int k = scan.nextInt();
 
         scan.close();
@@ -26,6 +27,7 @@ public class BinarySearch {
 
     }
 
+    // This method only works for the Ascending Order Array search
     public static int searching(int arr[], int k){
 
         int start = 0;
