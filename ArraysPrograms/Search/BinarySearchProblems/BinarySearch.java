@@ -21,9 +21,11 @@ public class BinarySearch {
         int k = scan.nextInt();
 
         scan.close();
-        // searching(nums, k);
-        int index = arrayAgnosticBinarySearch(nums, k);
-        System.out.printf("The Target is present at index %d", index);
+        int index = orderAgnosticBinarySearch(nums, k);
+        System.out.printf("index %d",index);
+        // // searching(nums, k);
+        // int index = arrayAgnosticBinarySearch(nums, k);
+        // System.out.printf("The Target is present at index %d", index);
 
     }
 
@@ -57,35 +59,37 @@ public class BinarySearch {
 
     }
 
-    // If we don't know the array is in ascending order or descending order
-    public static int arrayAgnosticBinarySearch(int arr[], int target){
+    //  This method will return the index of the value present in the array
+    public static int orderAgnosticBinarySearch(int arr[], int target){
 
         boolean isAsc = arr[0] < arr[arr.length - 1];
 
         int start = 0;
         int end = arr.length - 1;
 
-        while (start <= end) {
+        while (start < end) {
             int mid = start + (end - start) / 2;
-            // System.out.println("mid "+ mid);
-
-            if(arr[mid] == target){
+            
+            if(mid == target){
+                System.out.println("Mid "+ mid);
                 return mid;
-            } else if (isAsc){
-                if(arr[mid] < target){
-                    start = mid + 1;
-                }else{
-                    end = mid - 1;
+            }
+
+            if (isAsc) {
+                if (arr[mid] < target){
+                    end = mid + 1;
+                } else {
+                    start = mid - 1;
                 }
-            }else{
-                if(arr[mid] < target){
-                    end = mid - 1;
-                }else{
-                    start = mid + 1;
+            } else {
+                if (arr[mid] > target) {
+                    end = mid + 1;
+                } else {
+                    start = mid - 1;
                 }
             }
+
         }
         return -1;
     }
-
 }
