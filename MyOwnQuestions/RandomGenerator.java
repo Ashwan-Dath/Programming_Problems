@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class RandomGenerator {
     public static void main(String[] args) {
 
+        // Question : 
+
+
         Scanner input = new Scanner(System.in);
 
         System.out.println("\nEnter the Range Starting Character : ");
@@ -25,6 +28,8 @@ public class RandomGenerator {
         int innerCount = 0;
         
         ArrayList<String> allNumbers = new ArrayList<>();
+        // ArrayList<String> outerLength = new ArrayList<>();
+
 
         for(int i = (int) outerStart; i <=(int)outerEnd; i++){
             char a = (char)i;
@@ -68,25 +73,49 @@ public class RandomGenerator {
         Random rand = new Random();
 
         while (copyNums.size() != 0) {
-            int value = rand.nextInt(copyNums.size());
-            System.out.printf("%d, ", copyNums.get(value));
-            copyNums.remove(value);
+            int outerValue = rand.nextInt(copyNums.size());
+            // System.out.printf("outerValue: %d, copynumsvalue :%d, copynumssize : %d",outerValue, copyNums.get(outerValue), copyNums.size());
+            // System.out.print("\nresultArray at copyNums Index  " + result.get(copyNums.get(outerValue)));
+            // System.out.println("  resultArray Size at copyNums Index  " + result.get(copyNums.get(outerValue)));
+            // while (result.get(copyNums.get(outerValue)).size() != 0) {
+                if(result.get(copyNums.get(outerValue)).size() == 0){
+                    System.out.println("\n Now All values printed i have to break the loop");
+                    break;
+                }
+                int innerValue = rand.nextInt(result.get(copyNums.get(outerValue)).size());
+                int index = result.get(copyNums.get(outerValue)).remove(innerValue) - 1;
+                System.out.printf("%s, ", allNumbers.get(index));
+                
+                // System.out.print("Inner Array - innerValue  " + innerValue);
+                // System.out.printf("outerValue : %d, innerValue : %d\n", outerValue, innerValue);
+                // System.out.println("  Inner Array - Result array  Removed Value  " + result.get(copyNums.get(outerValue)).remove(innerValue));
+                // System.out.println("  Value  " + result.get(copyNums.get(outerValue)).remove(innerValue));
+                
+                // System.out.print("");
+            // }
+
+
+            // int innerValue = rand.nextInt(result.get(copyNums.get(outerValue)).size());
+            // System.out.println("  innerValue  " + innerValue);
+
+            // System.out.println("Remove Value  " + result.get(copyNums.get(outerValue)).remove(k));
+            // System.out.println("Inner Size " + result.());
+            // int innerValue = rand.nextInt(result.get(outerValue));
+
+            
+
+            copyNums.remove(outerValue);
+            if(copyNums.size() == 0){
+                copyNums = new ArrayList<>(nums);
+            }
         }
 
-                    if(copyNums.size() == 0)
-                System.out.printf("\nThere are no Values Present in the array.\n");
+        if(copyNums.size() == 0)
+            System.out.printf("\nThere are no Values Present in the array.\n");
 
 
         System.out.println();
         System.out.println(result.size());
-
-        // while (numbers.size() != 0) {
-        //     int value = rand.nextInt(numbers.size());
-        //     System.out.printf("%d, ", numbers.get(value));
-        //     numbers.remove(value);
-        //     // if(numbers.size() == 0)
-        //     //     System.out.printf("] \nThere are no Values Present in the array.");
-        // }
 
         for(int i =0; i < result.size(); i++){
             System.out.println(result.get(i));
