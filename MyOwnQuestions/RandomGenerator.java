@@ -84,7 +84,7 @@ public class RandomGenerator {
                 }
                 int innerValue = rand.nextInt(result.get(copyNums.get(outerValue)).size());
                 int index = result.get(copyNums.get(outerValue)).remove(innerValue) - 1;
-                System.out.printf("%s, ", allNumbers.get(index));
+                System.out.printf("%s,\n ", allNumbers.get(index));
                 
                 // System.out.print("Inner Array - innerValue  " + innerValue);
                 // System.out.printf("outerValue : %d, innerValue : %d\n", outerValue, innerValue);
