@@ -14,6 +14,37 @@ public class InputUser {
 // This is to push the code to github
     }
 
+    public static int[][] SortedRowAndColWiseIntegerArrayInput2D(){
+        System.out.print("Enter the row of the Array : ");
+        int row =  sc.nextInt();
+        System.out.print("Enter the column of the Array : ");
+        int col = sc.nextInt();
+
+
+        int [][] arr = new int[row][col];
+        // Giving col is optional, row is mandatory
+
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < col; j++){
+                System.out.print("Enter the value of "+(i+1)+" x "+(j+1)+" : ");
+                arr[i][j] = sc.nextInt();
+                if(j == 0 && i != 0){
+                    boolean b = arr[i][j] < arr[i][col - 1];
+                    if(b)
+                        throw new Error("Enter Only Sorted Row & Column Wise Numbers"); 
+                }
+            }
+        }
+
+//        for(int i = 0; i < row; i++){
+//            for(int j = 0; j < col; j++){
+//                System.out.print(arr[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+        return arr;
+    }
+
     public static int[][] IntegerArrayInput2D(){
         System.out.print("Enter the row of the Array : ");
         int row =  sc.nextInt();
