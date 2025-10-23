@@ -24,3 +24,56 @@
 // a = a + b - ( b = a);
 // System.out.print(a+" "+b);
 
+
+// package logic;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Logics {
+    public static void main(String[] args) {
+
+        // Question : 
+
+
+        Scanner input = new Scanner(System.in);
+
+        String outerStart = input.next();
+        String outerEnd = input.next();
+
+        System.out.println("OuterStart "+ outerStart);
+        System.out.println("OuterEnd "+ outerEnd);
+        outerStart = outerStart.toUpperCase();
+        outerEnd = outerEnd.toUpperCase();
+        System.out.println("OuterStart "+ outerStart);
+        System.out.println("OuterStart "+ outerStart.length());
+        System.out.println("OuterEnd "+ outerEnd);
+        System.out.println("OuterEnd "+ outerEnd.length());
+        
+        if(outerStart.length() > outerEnd.length()){
+            String tempString = outerStart;
+            outerStart = outerEnd;
+            outerEnd = tempString;
+        }
+
+        System.out.println("After OuterStart "+ outerStart);
+        System.out.println("After OuterStart "+ outerStart.length());
+        System.out.println("After OuterEnd "+ outerEnd);
+        System.out.println("After OuterEnd "+ outerEnd.length());
+        
+        // System.out.println("\nEnter the Range Starting Character : ");
+        // char outerStart = input.next().charAt(0);
+        // System.out.println("\nEnter the Range Ending Character : ");
+        // char outerEnd = input.next().charAt(0);
+        
+        // System.out.println("\nEnter the Range Starting Number : ");
+        // int innerStart = input.nextInt();
+        // System.out.println("\nEnter the Range Ending Number : ");
+        // int innerEnd = input.nextInt();
+
+        input.close();
+
+
+    }
+}
