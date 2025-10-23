@@ -1,5 +1,7 @@
 package ArraysPrograms.TwoDArrays.BinarySearchProblems;
 
+import java.lang.annotation.Target;
+import java.util.Scanner;
 import ArraysPrograms.UserInput.InputUser;
 
 public class FindTarget {
@@ -22,8 +24,92 @@ public class FindTarget {
         // If target is not found in the Array return -1;
         // The 2D array should be sorted in row and column wise.
 
-        System.out.println("Enter the size of the row");
-        int arr2D[][] = InputUser.IntegerArrayInput2D();
-        System.out.println(arr2D);
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("\nEnter the row of the Array : ");
+        int row = sc.nextInt();
+        System.out.print("Enter the column of the Array : ");
+        int col = sc.nextInt();
+
+        int arr2D[][] = InputUser.SortedRowAndColWiseIntegerArrayInput2D(row, col);
+
+        int target = InputUser.singleIntegerInput();
+
+        // int indexes[] = IterativeSolution(arr2D, target);
+
+        // if(indexes == null)
+        //     System.out.println("Target Not Found in the given 2D Array.");
+        // else
+        //     System.out.println("Target Found in the given 2D Array at Indexes :" + indexes[0] + " " + indexes[1]);
+
+        OptimisedSolution(arr2D, target, row, col);
+
+        sc.close();
     }
+
+
+    public static int[] IterativeSolution(int [][]arr, int target){
+        for(int i = 0; i < arr.length; i++ ){
+            for(int j = 0; j < arr[i].length; j++){
+                if(arr[i][j] == target)
+                {
+                    // System.out.println("Target Found at index : "+ i + " " + j);
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public static int[] OptimisedSolution(int [][]arr, int target, int row, int col){
+        
+        // int rowStart = 0;
+        // int rowEnd = row;
+        
+        // int colStart = 0;
+        // int colEnd = col;
+        // int lowBound = arr[0][0];
+        int lowBound = 0;
+        int uppBound = arr[0].length - 1;
+        // int uppBound = arr[arr.length - 1][arr[0].length - 1];
+
+        System.out.println("LowB : " + lowBound);
+        System.out.println("uppBound : " + uppBound);
+        
+        int mid = lowBound + (uppBound - lowBound) / 2;
+        System.out.println("Mid : " + mid);
+        // return null;
+        
+        
+        while (lowBound > uppBound) {
+            int midd = lowBound + (uppBound - lowBound) / 2;
+            System.out.printf("\nMid : %d, lowBOund : %d, UppBo : %d" ,midd, lowBound, uppBound);
+            // return 
+            if(target == arr[lowBound][midd]){
+                System.out.println("Target found"+ midd + " " + lowBound);
+            }
+            if(target > arr[lowBound][midd]){
+                System.out.println("Target > "+ midd + " " + lowBound);
+            }
+        }
+        return null;
+
+        // while(rowEnd < rowStart || colEnd < colStart) {
+        //     int rowMid = rowStart + (rowEnd - rowStart) / 2;
+        //     int colMid = colStart + (colEnd - colStart) / 2;
+
+        //     if(target == arr[rowMid][colMid]){
+        //         return new int[]{rowMid, colMid};
+        //     }
+
+        //     if(){
+
+        //     }
+
+            
+        // }
+        // return null;
+    }
+
 }
