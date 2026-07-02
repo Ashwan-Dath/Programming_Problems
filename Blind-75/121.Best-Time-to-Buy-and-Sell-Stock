@@ -1,0 +1,156 @@
+
+// 121. Best Time to Buy and Sell Stock
+// Easy
+// Topics
+// premium lock icon
+// Companies
+// You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+// You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+// Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+ 
+
+// Example 1:
+
+// Input: prices = [7,1,5,3,6,4]
+// Output: 5
+// Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+// Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+// Example 2:
+
+// Input: prices = [7,6,4,3,1]
+// Output: 0
+// Explanation: In this case, no transactions are done and the max profit = 0.
+ 
+
+// Constraints:
+
+// 1 <= prices.length <= 105
+// 0 <= prices[i] <= 104
+
+
+import java.util.Scanner;
+
+public class Main
+{
+    
+
+    public static int maxProfit(int[] prices) {
+        
+        // Approach:
+        // - Instead of checking every possible buy-sell pair, keep track of the
+        //   minimum price encountered so far while traversing the array.
+        // - For each day's price:
+        //      1. Update the minimum buying price if the current price is smaller.
+        //      2. Calculate the profit by selling on the current day
+        //         (current price - minimum price so far).
+        //      3. Update the maximum profit if the current profit is greater.
+        // - This allows us to find the maximum profit in a single traversal of the array.
+        
+        // Time Complexity: O(n)
+        // - The array is traversed only once.
+        // - Each iteration performs constant-time operations:
+        //      • Compare current price with minimum price.
+        //      • Calculate the current profit.
+        //      • Update the maximum profit using Math.max().
+        // - Since each element is visited exactly once, the time complexity is O(n).
+        
+        // Space Complexity: O(1)
+        // - No extra data structures (arrays, lists, maps, etc.) are used.
+        // - Only two integer variables (min and profit) are maintained
+        //   regardless of the input size.
+        // - Therefore, the space complexity is constant.
+        
+        int min = prices[0];   // Stores the minimum buying price seen so far.
+        int profit = 0;        // Stores the maximum profit found so far.
+        
+        // Traverse through each day's stock price.
+        for (int i = 0; i < prices.length; i++) {
+        
+            // If the current price is lower than the minimum price seen so far,
+            // update the minimum buying price.
+            if (prices[i] < min)
+                min = prices[i];
+        
+            // Calculate the profit if we sell on the current day after buying
+            // at the minimum price seen so far.
+            // Update the maximum profit if the current profit is greater.
+            // profit = Math.max(profit, prices[i] - min);
+            if(prices[i] - min > profit)
+                profit = prices[i] - min;
+        }
+        
+        // Return the maximum profit.
+        // If no profitable transaction is possible, the value remains 0.
+        return profit;
+        
+        
+
+        // // MY Solution:
+        // // - Use the Brute Force approach by checking every possible pair of buy and sell days.
+        // // - The outer loop selects the buying day.
+        // // - The inner loop selects every possible selling day after the buying day.
+        // // - If the selling price is greater than the buying price, calculate the profit.
+        // // - Keep updating the maximum profit whenever a larger profit is found.
+        
+        // // Time Complexity: O(n²)
+        // // - The outer loop runs 'n' times.
+        // // - For each iteration of the outer loop, the inner loop checks the remaining elements.
+        // // - Total comparisons = (n-1) + (n-2) + ... + 1 = n(n-1)/2.
+        // // - Ignoring constants, the time complexity becomes O(n²).
+        
+        // // Space Complexity: O(1)
+        // // - No extra data structures (arrays, lists, maps, etc.) are used.
+        // // - Only a few integer variables (profit, diff, i, j) are used regardless of input size.
+        // // - Therefore, the space complexity is constant.
+        
+        // int profit = 0;
+        
+        // // Iterate through each day as the potential buying day.
+        // for (int i = 0; i < prices.length; i++) {
+        
+        //     // Check every subsequent day as the potential selling day.
+        //     for (int j = i + 1; j < prices.length; j++) {
+        
+        //         // A profit is possible only if the selling price is greater than the buying price.
+        //         if (prices[i] < prices[j]) {
+        
+        //             // Calculate the profit for the current buy-sell pair.
+        //             int diff = prices[j] - prices[i];
+        
+        //             // Update the maximum profit if the current profit is greater.
+        //             if (diff > profit) {
+        //                 profit = diff;
+        //             }
+        //         }
+        //     }
+        // }
+        
+        // // Return the maximum profit found.
+        // // If no profitable transaction exists, the value remains 0.
+        // return profit;
+        
+    }
+
+	public static void main(String[] args) {
+	    int nums[] = IntegerArrayInput();
+	    int profit = maxProfit(nums);
+	    System.out.println("Profit"+profit);
+	}
+	
+    public static int[] IntegerArrayInput() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the Size of the Array : ");
+        int size = sc.nextInt();
+
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            System.out.printf("Enter the %d element in the Array : ", (i + 1));
+            arr[i] = sc.nextInt();
+        }
+        return arr;
+    }
+
+}
