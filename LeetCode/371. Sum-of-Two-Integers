@@ -1,19 +1,90 @@
+// 371. Sum of Two Integers
+// Medium
+// Topics
+// Companies
 
-//371. Sum of Two Integers
-// Given two integers a and b, return the sum of the two integers without using the operators + and -.
-
- 
+// Given two integers a and b, return the sum of the two integers
+// without using the operators '+' and '-'.
 
 // Example 1:
-
 // Input: a = 1, b = 2
 // Output: 3
-// Example 2:
 
+// Example 2:
 // Input: a = 2, b = 3
 // Output: 5
- 
+
+// Example 3:
+// Input: a = -1, b = 1
+// Output: 0
 
 // Constraints:
-
 // -1000 <= a, b <= 1000
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static int getSum(int a, int b) {
+
+        // Approach:
+        // - Addition consists of two operations:
+        //      1. Adding the bits without considering the carry.
+        //      2. Adding the carry to the next bit.
+        //
+        // - XOR (^) performs addition without carry.
+        // - AND (&) finds the carry bits.
+        // - Left Shift (<<) moves the carry to the next higher bit.
+        // - Repeat this process until there is no carry left.
+        // - Once the carry becomes 0, the remaining value is the final sum.
+
+        // Time Complexity: O(1)
+        // - Java integers have a fixed size of 32 bits.
+        // - In the worst case, the loop runs at most 32 times.
+        // - Since the number of iterations is bounded by a constant,
+        //   the time complexity is O(1).
+
+        // Space Complexity: O(1)
+        // - Only two additional integer variables (sum and carry) are used.
+        // - No extra data structures are created.
+
+        while (b != 0) {
+
+            // XOR gives the sum without considering the carry.
+            int sum = a ^ b;
+
+            // AND finds where the carry is generated.
+            // Left shift moves the carry to the next bit.
+            int carry = (a & b) << 1;
+
+            // Update a with the partial sum.
+            a = sum;
+
+            // Continue the process using the carry.
+            b = carry;
+        }
+
+        // Return the final sum.
+        return a;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter First Number : ");
+        int a = sc.nextInt();
+
+        System.out.print("Enter Second Number : ");
+        int b = sc.nextInt();
+
+        if(a <= -1000 || b >= 1000 ){
+            System.out.println("Didn't Followed Constraints");
+            return;
+        }
+
+        int ans = getSum(a, b);
+
+        System.out.println("Sum = " + ans);
+    }
+}
