@@ -469,4 +469,76 @@ class GFG {
 
 
 
+// 238. Product of Array Except Self
+// Given an integer array nums, return an array answer such that answer[i] is equal to the 
+// product of all the elements of nums except nums[i].
+
+// The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+// You must write an algorithm that runs in O(n) time and without using the division operation.
+
+ 
+
+// Example 1:
+// Input: nums = [1,2,3,4]
+// Output: [24,12,8,6]
+// Example 2:
+
+// Input: nums = [-1,1,0,-3,3]
+// Output: [0,0,9,0,0]
+ 
+
+// Constraints:
+// 2 <= nums.length <= 105
+// -30 <= nums[i] <= 30
+// The input is generated such that answer[i] is guaranteed to fit in a 32-bit integer.
+ 
+
+// Follow up: Can you solve the problem in O(1) extra space complexity? 
+// (The output array does not count as extra space for space complexity analysis.)
+
+public class Main
+{
+    public static int[] productExceptSelf(int[] nums) {
+        
+        
+        
+        // int prodArr[] = new int[nums.length];
+        // int mul = 1;
+        // for(int i = 0; i < nums.length; i++){
+        //     mul *= nums[i];
+        // }
+        
+        // for(int i = 0; i < nums.length; i++){
+        //     prodArr[i] = mul / nums[i];
+        // }
+        
+        // return prodArr;
+        
+        
+        
+        // 0(n^2)
+        // int prodArr[] = new int[nums.length];
+        // for(int i = 0; i < nums.length; i++){
+        //     int mul = 1;
+        //     for(int j = 0; j < nums.length; j++){
+        //         if(nums[i] != nums[j]){
+        //             mul *= nums[j];
+        //         }
+        //     }
+        //     prodArr[i] = mul;
+        // }
+        // return prodArr;
+    }
+
+	public static void main(String[] args) {
+	    int x[] = {1,2,3,4}; 
+	    int arr[] = productExceptSelf(x);
+	    for(int i = 0 ; i <arr.length; i++)
+	        System.out.println(arr[i]);
+	}
+}
+
+
+
 this is a new edit of the code after the ending of the day feels like tired and. didn't wanted to go the timing of the day shift making me feel like I didn't finished my thing's 
