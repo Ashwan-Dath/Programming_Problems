@@ -1,3 +1,19 @@
+// Array Input Code.
+// import java.util.Scanner;
+// Scanner sc = new Scanner(System.in);
+// System.out.print("Enter the Size of the Array : ");
+// int size = sc.nextInt();
+
+// int[] inputArr = new int[size];
+// for (int i = 0; i < size; i++) {
+// System.out.printf("Enter the %d element in the Array : ", (i + 1));
+// inputArr[i] = sc.nextInt();
+// }
+
+
+
+
+
 // 	public static boolean ValidBinary(String number){
 // 	    for(int i=0; i<number.length(); i++){
 // 	        if(number.charAt(i) == '0' || number.charAt(i) == '1');
