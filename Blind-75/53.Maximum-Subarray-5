@@ -1,0 +1,148 @@
+// 53. Maximum Subarray
+// Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+
+// Example 1:
+// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+// Output: 6
+// Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+
+// Example 2:
+// Input: nums = [1]
+// Output: 1
+// Explanation: The subarray [1] has the largest sum 1.
+
+// Example 3:
+// Input: nums = [5,4,-1,7,8]
+// Output: 23
+// Explanation: The subarray [5,4,-1,7,8] has the largest sum 23.
+ 
+
+// Constraints:
+// 1 <= nums.length <= 105
+// -104 <= nums[i] <= 104
+ 
+
+// Follow up: If you have figured out the O(n) solution, 
+// try coding another solution using the divide and conquer approach, which is more subtle.
+
+
+import java.util.*;
+public class Main
+{
+    
+    
+    public static int maxSubArray(int[] nums) {
+        
+        
+        // Approach:
+        // - Traverse the array only once.
+        // - Maintain:
+        //      1. current -> Sum of the current subarray.
+        //      2. max -> Maximum sum found so far.
+        // - If the current sum becomes negative,
+        //   it cannot contribute to a larger future sum.
+        // - Reset the current sum to 0.
+        // - Continue adding the next elements.
+        // - Update the maximum sum whenever a larger sum is found.
+        
+        // Time Complexity: O(n)
+        // - The array is traversed only once.
+        // - Each element is processed once.
+        // - Therefore, the time complexity is O(n).
+        
+        // Space Complexity: O(1)
+        // - Only two integer variables are used.
+        // - No additional data structures are created.
+        
+        int current = 0;
+        int max = Integer.MIN_VALUE;
+        
+        // Traverse every element.
+        for (int i = 0; i < nums.length; i++) {
+        
+            // If the current sum becomes negative,
+            // discard it and start a new subarray.
+            if (current < 0)
+                current = 0;
+        
+            // Add the current element.
+            current += nums[i];
+        
+            // Update the maximum sum.
+            max = Math.max(max, current);
+        }
+        
+        return max;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        // // First Approach:
+        // // - Consider every possible subarray.
+        // // - The outer loop selects the starting index.
+        // // - The inner loop extends the subarray one element at a time.
+        // // - Keep calculating the running sum.
+        // // - Update the maximum sum whenever a larger sum is found.
+        
+        // // Time Complexity: O(n²)
+        // // - Outer loop runs n times.
+        // // - Inner loop runs for the remaining elements.
+        // // - Total complexity becomes O(n²).
+        
+        // // Space Complexity: O(1)
+        // // - Only a few integer variables are used.
+        // // - No extra data structures are created.
+        
+        // int max = Integer.MIN_VALUE;
+        
+        // // Select the starting index.
+        // for (int i = 0; i < nums.length; i++) {
+        
+        //     int sum = 0;
+        
+        //     // Extend the subarray.
+        //     for (int j = i; j < nums.length; j++) {
+        
+        //         // Add the current element.
+        //         sum += nums[j];
+        
+        //         // Update the maximum sum.
+        //         max = Math.max(max, sum);
+        //     }
+        // }
+        
+        // return max;
+    }
+
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the Size of the Array : ");
+        int size = sc.nextInt();
+        
+        if(size <= 0 || size > 105){
+            System.out.print("Size of the Array should be in between 1 - 105: ");
+            return
+        }
+        
+        int[] inputArr = new int[size];
+        for (int i = 0; i < size; i++) {
+            System.out.printf("Enter the %d element in the Array : ", (i + 1));
+            inputArr[i] = sc.nextInt();
+            if(inputArr[i] < -104 || inputArr[i] > 104){
+                System.out.print("Elements in the Array should be in between -104 - 104: ");
+                return
+            }
+        }
+
+        int max = maxSubArray(inputArr);
+        System.out.println("MAx"+ max);
+	}
+}
