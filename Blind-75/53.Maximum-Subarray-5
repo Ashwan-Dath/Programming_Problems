@@ -146,3 +146,378 @@ public class Main
         System.out.println("MAx"+ max);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// Have to check and calculate using the recurssive method
+// The follow-up is asking you to solve the same problem using the
+// **Divide and Conquer** technique instead of Kadane's Algorithm.
+
+// Interviewers usually ask this to check whether you understand another 
+// important algorithmic paradigm besides dynamic programming.
+
+// ---
+
+// # What is Divide and Conquer?
+
+// The idea is:
+
+// 1. Divide the array into two halves.
+// 2. Solve the problem for the left half.
+// 3. Solve the problem for the right half.
+// 4. Combine the results.
+
+// This is exactly the same philosophy used in **Merge Sort**.
+
+// For Maximum Subarray, the maximum subarray can only be one of **three possibilities**.
+
+// ---
+
+// ## Consider this array
+
+// ```text
+// [-2,1,-3,4,-1,2,1,-5,4]
+// ```
+
+// Suppose we split it in the middle.
+
+// ```text
+//             mid
+//              ↓
+
+// [-2,1,-3,4 | -1,2,1,-5,4]
+// ```
+
+// Now ask:
+
+// Where can the maximum subarray be?
+
+// Only three places.
+
+// ### Case 1
+
+// Entirely in the left half.
+
+// ```text
+// [-2,1,-3,4]
+// ```
+
+// ---
+
+// ### Case 2
+
+// Entirely in the right half.
+
+// ```text
+// [-1,2,1,-5,4]
+// ```
+
+// ---
+
+// ### Case 3
+
+// Crosses the middle.
+
+// Example
+
+// ```text
+// 4 | -1,2,1
+
+// Sum = 6
+// ```
+
+// Notice
+
+// It starts in the left half
+
+// and
+
+// ends in the right half.
+
+// ---
+
+// So
+
+// ```text
+// Maximum
+
+// =
+
+// max(
+
+// Left Answer,
+
+// Right Answer,
+
+// Cross Answer
+
+// )
+// ```
+
+// ---
+
+// # How do we calculate the Cross Answer?
+
+// Suppose
+
+// ```text
+// [1,2,-5,6 | 3,-2,4]
+//              ↑
+//             mid
+// ```
+
+// We need
+
+// the maximum subarray
+
+// that **must cross the middle**.
+
+// ---
+
+// ### Step 1
+
+// Go left from the middle.
+
+// ```text
+// 6
+
+// 6 + (-5)
+
+// 6 + (-5) + 2
+
+// 6 + (-5) +2 +1
+// ```
+
+// Keep the largest.
+
+// Suppose
+
+// ```text
+// Left Max = 6
+// ```
+
+// ---
+
+// ### Step 2
+
+// Go right.
+
+// ```text
+// 3
+
+// 3 + (-2)
+
+// 3 + (-2)+4
+// ```
+
+// Largest
+
+// ```text
+// 5
+// ```
+
+// ---
+
+// Cross Answer
+
+// ```text
+// 6 + 5
+
+// =
+
+// 11
+// ```
+
+// ---
+
+// # Recursive Tree
+
+// Suppose
+
+// ```text
+// [1,-2,3,4]
+// ```
+
+// Split
+
+// ```text
+//         [1,-2,3,4]
+
+//           /      \
+
+//       [1,-2]    [3,4]
+
+//       /   \      /   \
+
+//     [1] [-2]  [3] [4]
+// ```
+
+// Each small array returns its answer.
+
+// Then we combine upward.
+
+// Exactly like Merge Sort.
+
+// ---
+
+// # Algorithm
+
+// ```text
+// MaximumSubarray(left,right)
+
+// If left==right
+
+// return nums[left]
+
+// mid=(left+right)/2
+
+// leftMax
+
+// =
+
+// MaximumSubarray(left,mid)
+
+// rightMax
+
+// =
+
+// MaximumSubarray(mid+1,right)
+
+// crossMax
+
+// =
+
+// CrossingSum(left,mid,right)
+
+// return max(leftMax,rightMax,crossMax)
+// ```
+
+// ---
+
+// # Java Code
+
+// ```java
+// class Solution {
+
+//     public int maxSubArray(int[] nums) {
+//         return divide(nums, 0, nums.length - 1);
+//     }
+
+//     public int divide(int[] nums, int left, int right) {
+
+//         // Base case
+//         // If there is only one element,
+//         // it is the maximum subarray.
+//         if (left == right)
+//             return nums[left];
+
+//         int mid = (left + right) / 2;
+
+//         // Maximum subarray in left half.
+//         int leftMax = divide(nums, left, mid);
+
+//         // Maximum subarray in right half.
+//         int rightMax = divide(nums, mid + 1, right);
+
+//         // Maximum subarray crossing the middle.
+//         int crossMax = cross(nums, left, mid, right);
+
+//         // Return the maximum of the three possibilities.
+//         return Math.max(Math.max(leftMax, rightMax), crossMax);
+//     }
+
+//     public int cross(int[] nums, int left, int mid, int right) {
+
+//         int sum = 0;
+//         int leftSum = Integer.MIN_VALUE;
+
+//         // Find the maximum sum ending at mid.
+//         for (int i = mid; i >= left; i--) {
+//             sum += nums[i];
+//             leftSum = Math.max(leftSum, sum);
+//         }
+
+//         sum = 0;
+//         int rightSum = Integer.MIN_VALUE;
+
+//         // Find the maximum sum starting at mid + 1.
+//         for (int i = mid + 1; i <= right; i++) {
+//             sum += nums[i];
+//             rightSum = Math.max(rightSum, sum);
+//         }
+
+//         return leftSum + rightSum;
+//     }
+// }
+// ```
+
+// ---
+
+// # Time Complexity
+
+// ```
+// T(n)
+
+// =
+
+// 2T(n/2)
+
+// +
+
+// O(n)
+// ```
+
+// Why?
+
+// * Left recursion → `T(n/2)`
+// * Right recursion → `T(n/2)`
+// * Finding the crossing sum takes **O(n)**.
+
+// Applying the Master Theorem:
+
+// ```
+// T(n)=O(n log n)
+// ```
+
+// ---
+
+// # Space Complexity
+
+// ```
+// O(log n)
+// ```
+
+// because of the recursion stack.
+
+// ---
+
+// # Comparison
+
+// | Method             | Time           | Space        | Interview Preference |
+// | ------------------ | -------------- | ------------ | -------------------- |
+// | Brute Force        | **O(n²)**      | **O(1)**     | ❌                    |
+// | Divide & Conquer   | **O(n log n)** | **O(log n)** | ✅ Follow-up solution |
+// | Kadane's Algorithm | **O(n)**       | **O(1)**     | ⭐ Best solution      |
+
+// ---
+
+// ## When should you use Divide and Conquer?
+
+// For this problem, **Kadane's Algorithm is the optimal solution** and 
+// is what interviewers expect first.
+
+// The **Divide and Conquer** solution is included as a follow-up because 
+// it demonstrates your understanding of recursive problem decomposition. 
+// It's not faster than Kadane's Algorithm, but it's a valuable technique 
+// that's also used in algorithms like **Merge Sort**, **Quick Sort**, **Binary Search**, 
+// and **Closest Pair of Points**. Knowing both approaches shows a deeper understanding of 
+// algorithm design.
