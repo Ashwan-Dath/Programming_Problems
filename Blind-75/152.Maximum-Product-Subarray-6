@@ -1,0 +1,174 @@
+// 152. Maximum Product Subarray
+// Given an integer array nums, find a subarray that has the largest product, and return the product.
+
+// The test cases are generated so that the answer will fit in a 32-bit integer.
+
+// Note that the product of an array with a single element is the value of that element.
+
+ 
+
+// Example 1:
+// Input: nums = [2,3,-2,4]
+// Output: 6
+// Explanation: [2,3] has the largest product 6.
+
+// Example 2:
+// Input: nums = [-2,0,-1]
+// Output: 0
+// Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
+ 
+
+// Constraints:
+
+// 1 <= nums.length <= 2 * 10^4
+// -10 <= nums[i] <= 10
+// The product of any subarray of nums is guaranteed to fit in a 32-bit integer.
+
+
+import java.util.*;
+public class Main
+{
+    
+    
+    public static int maxProduct(int[] nums) {
+        
+        if(nums.length == 0)
+            return 0;
+        
+        
+        // Approach: 
+        // - Maintain two values while traversing the array:
+        //      1. maxMul -> Maximum product ending at the current index.
+        //      2. minMul -> Minimum product ending at the current index.
+        // - A negative number can swap the maximum and minimum products.
+        // - Therefore, for every element, calculate:
+        //      • Current number itself.
+        //      • Current number × previous maximum product.
+        //      • Current number × previous minimum product.
+        // - The largest of these becomes the new maximum product.
+        // - The smallest becomes the new minimum product.
+        // - Keep updating the overall answer.
+        
+        // Time Complexity: O(n)
+        // - The array is traversed only once.
+        // - Each iteration performs constant-time calculations.
+        // - Therefore, the time complexity is O(n).
+        
+        // Space Complexity: O(1)
+        // - Only a few integer variables are used.
+        // - No extra arrays or data structures are created.
+        
+        if (nums.length == 0)
+            return 0;
+        
+        int minMul = 1;
+        int maxMul = 1;
+        int ans = Integer.MIN_VALUE;
+        
+        // Traverse the array.
+        for (int i = 0; i < nums.length; i++) {
+        
+            int current = nums[i];
+        
+            // Store the maximum product before updating maxMul.
+            int temp = Math.max(
+                            Math.max(minMul * current, maxMul * current),
+                            current);
+        
+            // Update the minimum product.
+            minMul = Math.min(
+                            Math.min(minMul * current, maxMul * current),
+                            current);
+        
+            // Update the maximum product.
+            maxMul = temp;
+        
+            // Update the overall answer.
+            ans = Math.max(ans, maxMul);
+        }
+        
+        return ans;
+
+
+        // int minMul = 1, maxMul = 1, ans = Integer.MIN_VALUE;
+        // for(int i = 0; i < nums.length; i++){
+        //     // Instead of storing the value of calculation we can directly do calculatoin to reduce 
+        //     // the memory storage.
+        //     // minMul *= nums[i];
+        //     // maxMul *= nums[i]; 
+        //     int current = nums[i]
+        //     int temp = Math.max(Math.max(minMul * cur, nums[i]), maxMul * cur);
+        //     minMul = Math.min(Math.min(nums[i], maxMul * cur), minMul * cur);
+        //     maxMul = temp;
+        //     if(ans < maxMul)
+        //         ans = maxMul;
+        // }
+        // return ans;
+        
+        
+        
+        
+        // // Approach: 1 Brute Force
+        // // - Generate every possible contiguous subarray.
+        // // - Calculate the product of every subarray.
+        // // - Keep updating the maximum product.
+        // // - Return the largest product found.
+        
+        // // Time Complexity: O(n²)
+        // // - The outer loop selects the starting index.
+        // // - The inner loop extends the subarray.
+        // // - Therefore, the overall time complexity is O(n²).
+        
+        // // Space Complexity: O(1)
+        // // - Only a few integer variables are used.
+        // // - No additional data structures are created.
+        
+        // int ans = Integer.MIN_VALUE;
+        
+        // // Select the starting index.
+        // for (int i = 0; i < nums.length; i++) {
+        
+        //     int mul = 1;
+        
+        //     // Extend the subarray.
+        //     for (int j = i; j < nums.length; j++) {
+        
+        //         // Multiply the current element.
+        //         mul *= nums[j];
+        
+        //         // Update the maximum product.
+        //         ans = Math.max(ans, mul);
+        //     }
+        // }
+        
+        // return ans;
+    }
+
+	public static void main(String[] args) {
+	    
+	   
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the Size of the Array : ");
+        int size = sc.nextInt();
+    
+        if(size < 1 || size > 20000){
+            System.out.print("Size of the Array should be in between 1 - 20000 ");
+            return
+        }
+    
+        int[] inputArr = new int[size];
+        for (int i = 0; i < size; i++) {
+            System.out.printf("Enter the %d element in the Array : ", (i + 1));
+            inputArr[i] = sc.nextInt();
+            if(inputArr[i] < -10 || inputArr[i] > 10){
+                System.out.print("Elements in the Array should be in between -10 - 10 ");
+                return
+            }
+        }
+
+        // int []inputArr = {-1,-2,-9,-6};
+        int max = maxProduct(inputArr);
+        System.out.println("MAx"+ max);
+	}
+}
+
