@@ -23,38 +23,108 @@
 // n == height.length
 // 2 <= n <= 105
 // 0 <= height[i] <= 104
-
-
+ 
 
 public class Main
 {
     public static int area(int nums[]){
+        
+        
+        // // Approach 1: Brute Force
+        // // - Consider every possible pair of lines.
+        // // - For every pair:
+        // //      1. Calculate the width.
+        // //      2. Calculate the height using the smaller line.
+        // //      3. Calculate the area.
+        // //      4. Update the maximum area.
+        // // - Return the largest area found.
+        
+        // // Time Complexity: O(n²)
+        // // - The outer loop selects the first line.
+        // // - The inner loop selects the second line.
+        // // - Every pair is checked.
+        // // - Therefore, the overall time complexity is O(n²).
+        
+        // // Space Complexity: O(1)
+        // // - Only a few integer variables are used.
+        // // - No additional data structures are created.
+        
+        // int area = 0;
+        
+        // for (int i = 0; i < nums.length; i++) {
+        
+        //     for (int j = i + 1; j < nums.length; j++) {
+        
+        //         // Width between the two lines.
+        //         int width = j - i;
+        
+        //         // Height of the container is the smaller line.
+        //         int height = Math.min(nums[i], nums[j]);
+        
+        //         // Calculate the area.
+        //         area = Math.max(area, width * height);
+        //     }
+        // }
+        
+        // return area;
+        
+        
+        
+        
+        
+        // Approach 2:
+        // - Place one pointer at the beginning
+        //   and another pointer at the end.
+        // - These two lines form the widest possible container.
+        // - Calculate the area.
+        // - The shorter line limits the height of the container.
+        // - Move the pointer pointing to the shorter line inward,
+        //   hoping to find a taller line.
+        // - Continue until both pointers meet.
+        // - Keep updating the maximum area.
+        
+        // Time Complexity: O(n)
+        // - Each pointer moves at most n times.
+        // - The array is traversed only once.
+        // - Therefore, the time complexity is O(n).
+        
+        // Space Complexity: O(1)
+        // - Only a few integer variables are used.
+        // - No additional data structures are created.
+        
         int left = 0;
         int right = nums.length - 1;
         int max = 0;
-        while(left <= right){
-            int area = (right - left) * (Math.min(nums[left], nums[right]) );
-            max = Math.max(area, max);
-            if(nums[left] > nums[right]){
+        
+        // Continue until both pointers meet.
+        while (left < right) {
+        
+            // Width between the two lines.
+            int width = right - left;
+        
+            // Height is determined by the shorter line.
+            int height = Math.min(nums[left], nums[right]);
+        
+            // Calculate the current area.
+            int area = width * height;
+            
+            // Update the maximum area.
+            max = Math.max(max, area);
+            
+            // Move the shorter line inward.
+            if (nums[left] < nums[right]) {
                 left++;
-            }else{
+            } else {
                 right--;
             }
         }
-        return max;
         
-        // int area = 0;
-        // for(int i = 0; i < nums.length; i++){
-        //     for(int j = i + 1; j < nums.length; j++){
-        //         System.out.println("Width : " + (j - i) + " Height : " + (Math.min(nums[i], nums[j])) + " nums[i] : " + nums[i] + " nums[j] : " + nums[j]);
-        //         ara = Math.max(ara, ((j - i) * (Math.min(nums[i], nums[j]))));
-        //     }
-        //     System.out.println();
-        // }
-        // return area;
+        // Return the maximum area found.
+        return max;
     }
+    
+    
 	public static void main(String[] args) {
-
         // Scanner sc = new Scanner(System.in);
         // System.out.print("Enter the Size of the Array : ");
         // int size = sc.nextInt();
@@ -66,7 +136,7 @@ public class Main
         // }
         
         // int inputArr[] = {1,5,2,7,2,8,9,10};
-        int inputArr[] = {1,8,6,2,5,4,8,3,7};
+        int inputArr[] = {1,5,2,7,2,8,9,10};
         int valu = area(inputArr);
         System.out.println(valu);
 	}
