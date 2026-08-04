@@ -43,9 +43,30 @@ class ListNode {
 
 public class Main{
 
-// 	public ListNode deleteDuplicates(ListNode head) {
-
-// 	}
+	static ListNode deleteDuplicates(ListNode head) {
+        
+        if (head == null || head.next == null) {
+            return head;
+        }
+        
+	    ListNode firstPointer = head;
+	    ListNode secondPointer = head.next;
+	    
+	    while (secondPointer != null){
+	        
+	        if(firstPointer.val == secondPointer.val){
+	            
+	            secondPointer = secondPointer.next;
+	            firstPointer.next = secondPointer;
+	        } else (firstPointer.val != secondPointer.val){
+	            firstPointer = secondPointer;
+	            secondPointer = secondPointer.next;
+	        }
+	        
+	    }
+	    
+	    return head;
+	}
 
 	static ListNode insert(ListNode head, int val){
 	
@@ -100,6 +121,9 @@ public class Main{
 			System.out.println("Now the programs starts");
 		}
 		display(head);
+		deleteDuplicates(head);
+		display(head);
+		
 	}
 
 
