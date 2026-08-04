@@ -3,20 +3,16 @@
 // Given an integer array nums sorted in non-decreasing order, return an array of the
 // squares of each number sorted in non-decreasing order.
 
- 
-
 // Example 1:
-
 // Input: nums = [-4,-1,0,3,10]
 // Output: [0,1,9,16,100]
 // Explanation: After squaring, the array becomes [16,1,0,9,100].
 // After sorting, it becomes [0,1,9,16,100].
-// Example 2:
 
+// Example 2:
 // Input: nums = [-7,-3,2,3,11]
 // Output: [4,9,9,49,121]
  
-
 // Constraints:
 
 // 1 <= nums.length <= 104
@@ -34,7 +30,27 @@ import java.util.Arrays;
 public class Main{
 
 	public static int[] sortedSquares(int[] nums) {
-	    
+
+        // Approach 1: Two Pointer
+        // Time Complexity: O(n)
+        
+        // Explanation:
+        
+        // The algorithm uses two pointers (left and right) starting from both ends of the array.
+        // A single for loop runs exactly n times, where n is the length of the array.
+        // In each iteration, only constant-time operations are performed:
+        // Compare the absolute values of nums[left] and nums[right]
+        // Square one value
+        // Store it in the result array
+        // Move either the left or right pointer
+        // Since each element is processed only once, the total time complexity is O(n).
+        // Space Complexity: O(n)
+        
+        // Explanation:
+        
+        // A new array sqr[] of size n is created to store the squared values in sorted order.
+        // Apart from the output array, only a few variables (left, right, and i) are used.
+        // Therefore, the auxiliary/output space required is O(n).
 		int sqr[] = new int[nums.length];
 		
 		int left = 0;
@@ -69,6 +85,47 @@ public class Main{
 		
 		return sqr;
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+        // Approach 2: Square First, Then Sort
+        // Time Complexity: O(n²)
+        
+        // Explanation:
+        
+        // The first loop squares every element of the array, which takes O(n) time.
+        // The second part uses two nested loops to sort the squared values.
+        // The outer loop runs n times.
+        // The inner loop runs approximately n-1, n-2, ..., 1 times.
+        // Total comparisons are approximately:
+        // (n - 1) + (n - 2) + ... + 1
+        // = n(n - 1) / 2
+        // Ignoring constants, this becomes O(n²).
+        // Therefore, the overall time complexity is:
+        // O(n) + O(n²) = O(n²)
+        
+        // since O(n²) dominates.
+        
+        // Space Complexity: O(n)
+        
+        // Explanation:
+        
+        // A separate array sqr[] of size n is created to store the squared values.
+        // Only one additional variable (temp) is used during sorting.
+        // Hence, the total extra space required is O(n).
 // 		int []sqr = new int[nums.length];
 // 		for(int i = 0; i < nums.length; i++){
 
