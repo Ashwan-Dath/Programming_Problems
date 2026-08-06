@@ -32,7 +32,21 @@
 // 3 <= nums.length <= 3000
 // -105 <= nums[i] <= 105
 
+// [1,2,0,1,0,0,0,0]
+// Output
+// [[0,0,0],[0,0,0]]
+// Expected
+// [[0,0,0]]
 
+
+// nums =
+// [-2,0,1,1,2]
+
+// Use Testcase
+// Output
+// [[-2,0,2]]
+// Expected
+// [[-2,0,2],[-2,1,1]]
 
 import java.util.Scanner;
 import java.util.List;
@@ -43,30 +57,756 @@ public class Main{
 
 	public static List<List<Integer>> threeSum(int[] nums) {
 		
+		
+		
+		
+// 		# Three Sum Algorithm – Step-by-Step Explanation with Time & Space Complexity
+
+//         ## Algorithm
+        
+//         The algorithm finds all unique triplets whose sum is `0`.
+        
+//         Instead of checking every possible triplet (which takes `O(n³)`), it first sorts the array and then uses the **two-pointer technique**, reducing the complexity to `O(n²)`.
+        
+//         ---
+        
+//         # Step 1: Create the Result List
+        
+//         ```java
+//         List<List<Integer>> list = new ArrayList<>();
+//         ```
+        
+//         ### Purpose
+        
+//         This list stores all the valid triplets.
+        
+//         Example:
+        
+//         ```text
+//         [
+//           [-1, -1, 2],
+//           [-1, 0, 1]
+//         ]
+//         ```
+        
+//         ### Time Complexity
+        
+//         ```
+//         O(1)
+//         ```
+        
+//         Creating an empty `ArrayList` takes constant time.
+        
+//         ### Space Complexity
+        
+//         ```
+//         O(1)
+//         ```
+        
+//         Initially, no extra elements are stored.
+        
+//         ---
+        
+//         # Step 2: Sort the Array
+        
+//         ```java
+//         Arrays.sort(nums);
+//         ```
+        
+//         ### Purpose
+        
+//         Sorting is required because the two-pointer approach only works correctly on a sorted array.
+        
+//         Example:
+        
+//         Before sorting
+        
+//         ```
+//         [-1, 0, 1, 2, -1, -4]
+//         ```
+        
+//         After sorting
+        
+//         ```
+//         [-4, -1, -1, 0, 1, 2]
+//         ```
+        
+//         Now:
+        
+//         * Smaller numbers are on the left.
+//         * Larger numbers are on the right.
+//         * Duplicate values become adjacent, making them easy to skip.
+        
+//         ### Time Complexity
+        
+//         ```
+//         O(n log n)
+//         ```
+        
+//         ### Space Complexity
+        
+//         ```
+//         O(log n)
+//         ```
+        
+//         (Java's sort for primitive arrays uses Dual-Pivot Quicksort, which requires recursion stack space.)
+        
+//         ---
+        
+//         # Step 3: Iterate Through the Array
+        
+//         ```java
+//         for(int i = 0; i < nums.length - 2; i++)
+//         ```
+        
+//         ### Purpose
+        
+//         Each element is considered as the **first number** of the triplet.
+        
+//         Example
+        
+//         ```
+//         Sorted Array
+        
+//         [-4, -1, -1, 0, 1, 2]
+        
+//          ^
+//          i
+//         ```
+        
+//         Initially,
+        
+//         ```
+//         nums[i] = -4
+//         ```
+        
+//         After one iteration,
+        
+//         ```
+//         [-4, -1, -1, 0, 1, 2]
+        
+//              ^
+//              i
+//         ```
+        
+//         Now,
+        
+//         ```
+//         nums[i] = -1
+//         ```
+        
+//         The loop continues until only two numbers remain.
+        
+//         ### Time Complexity
+        
+//         ```
+//         O(n)
+//         ```
+        
+//         ---
+        
+//         # Step 4: Initialize Two Pointers
+        
+//         ```java
+//         int left = i + 1;
+//         int right = nums.length - 1;
+//         ```
+        
+//         ### Purpose
+        
+//         After fixing the first number (`nums[i]`):
+        
+//         * `left` starts immediately after `i`.
+//         * `right` starts at the last element.
+        
+//         Example
+        
+//         ```
+//         [-4, -1, -1, 0, 1, 2]
+        
+//           i   L           R
+//         ```
+        
+//         ---
+        
+//         # Step 5: Skip Duplicate First Elements
+        
+//         ```java
+//         if(i > 0 && nums[i] == nums[i - 1]){
+//             continue;
+//         }
+//         ```
+        
+//         ### Purpose
+        
+//         Suppose the array is
+        
+//         ```
+//         [-4, -1, -1, 0, 1, 2]
+//         ```
+        
+//         When
+        
+//         ```
+//         i = 1
+        
+//         nums[i] = -1
+//         ```
+        
+//         the algorithm finds
+        
+//         ```
+//         [-1, 0, 1]
+//         ```
+        
+//         Now,
+        
+//         ```
+//         i = 2
+        
+//         nums[i] = -1
+//         ```
+        
+//         If we search again, we will find the same triplet again.
+        
+//         Therefore, duplicate starting values are skipped.
+        
+//         ### Time Complexity
+        
+//         ```
+//         O(1)
+//         ```
+        
+//         ---
+        
+//         # Step 6: Start the Two-Pointer Search
+        
+//         ```java
+//         while(left < right)
+//         ```
+        
+//         This is the core of the algorithm.
+        
+//         Initially
+        
+//         ```
+//         [-4, -1, -1, 0, 1, 2]
+        
+//          i    L          R
+//         ```
+        
+//         At every iteration, one of the pointers moves.
+        
+//         Possible pointer movements:
+        
+//         ```
+//         left++
+//         ```
+        
+//         or
+        
+//         ```
+//         right--
+//         ```
+        
+//         or
+        
+//         ```
+//         both
+//         ```
+        
+//         The pointers never move backward.
+        
+//         ---
+        
+//         # Step 7: Check the Sum
+        
+//         ```java
+//         if(nums[left] + nums[right] == -(nums[i]))
+//         ```
+        
+//         This checks
+        
+//         ```
+//         nums[i] + nums[left] + nums[right] == 0
+//         ```
+        
+//         Example
+        
+//         ```
+//         nums[i] = -1
+        
+//         left = 0
+        
+//         right = 1
+        
+//         -1 + 0 + 1 = 0
+//         ```
+        
+//         A valid triplet is found.
+        
+//         ---
+        
+//         # Step 8: Store the Triplet
+        
+//         ```java
+//         list.add(Arrays.asList(nums[i], nums[left], nums[right]));
+//         ```
+        
+//         Example
+        
+//         ```
+//         [-1, 0, 1]
+//         ```
+        
+//         is added to
+        
+//         ```
+//         [
+//           [-1,0,1]
+//         ]
+//         ```
+        
+//         If another triplet is found
+        
+//         ```
+//         [-1,-1,2]
+//         ```
+        
+//         the result becomes
+        
+//         ```
+//         [
+//           [-1,0,1],
+//           [-1,-1,2]
+//         ]
+//         ```
+        
+//         ### Time Complexity
+        
+//         ```
+//         O(1)
+//         ```
+        
+//         Creating a list of three elements and adding it to the result list both take constant time.
+        
+//         ---
+        
+//         # Step 9: Move Both Pointers
+        
+//         ```java
+//         left++;
+//         right--;
+//         ```
+        
+//         Why?
+        
+//         The current combination has already been processed.
+        
+//         So we move both pointers to search for another possible pair.
+        
+//         Example
+        
+//         Before
+        
+//         ```
+//         L             R
+//         ↓             ↓
+        
+//         0 1 2 3 4 5
+//         ```
+        
+//         After
+        
+//         ```
+//           L       R
+//           ↓       ↓
+        
+//         0 1 2 3 4 5
+//         ```
+        
+//         ---
+        
+//         # Step 10: Skip Duplicate Left Values
+        
+//         ```java
+//         while(left < right && nums[left] == nums[left + 1]){
+//             left++;
+//         }
+//         ```
+        
+//         Suppose
+        
+//         ```
+//         [-2,0,2,2,2]
+//         ```
+        
+//         Current
+        
+//         ```
+//         left
+        
+//         ↓
+        
+//         [-2,0,2,2,2]
+//               ^
+//         ```
+        
+//         Without duplicate skipping
+        
+//         ```
+//         2
+//         ↓
+        
+//         2
+//         ↓
+        
+//         2
+//         ```
+        
+//         The algorithm would repeatedly produce the same triplet.
+        
+//         Instead,
+        
+//         ```
+//         left
+        
+//         ↓
+        
+//         2
+        
+//         ↓
+        
+//         jump
+        
+//         ↓
+        
+//         last 2
+//         ```
+        
+//         Duplicate values are skipped immediately.
+        
+//         ### Time Complexity
+        
+//         At first glance, this appears to be another loop inside the main `while` loop.
+        
+//         However, it is still **O(n)**.
+        
+//         Reason:
+        
+//         `left` only moves **forward**.
+        
+//         Suppose the array has 100 elements.
+        
+//         ```
+//         left
+        
+//         0 → 1 → 2 → 3 → 4 → ... → 99
+//         ```
+        
+//         `left` can move at most **99 times**.
+        
+//         Whether it moves by
+        
+//         ```java
+//         left++;
+//         ```
+        
+//         or
+        
+//         ```java
+//         while(...) left++;
+//         ```
+        
+//         does not matter.
+        
+//         The total number of increments is still at most `n`.
+        
+//         Therefore,
+        
+//         ```
+//         Total work done by left = O(n)
+//         ```
+        
+//         not
+        
+//         ```
+//         O(n²)
+//         ```
+        
+//         ---
+        
+//         # Step 11: Skip Duplicate Right Values
+        
+//         ```java
+//         while(right > left && nums[right] == nums[right - 1]){
+//             right--;
+//         }
+//         ```
+        
+//         The same idea applies.
+        
+//         `right` only moves left.
+        
+//         Example
+        
+//         ```
+//         9 → 8 → 7 → 6 → 5 → 4
+//         ```
+        
+//         It never returns to
+        
+//         ```
+//         5 → 6 → 7
+//         ```
+        
+//         Therefore,
+        
+//         the total work done by `right` is also
+        
+//         ```
+//         O(n)
+//         ```
+        
+//         ---
+        
+//         # Why Isn't It O(n²) Inside the While Loop?
+        
+//         Many beginners think:
+        
+//         ```
+//         while(...)
+//         {
+//             while(...)
+//         }
+//         ```
+        
+//         means
+        
+//         ```
+//         O(n²)
+//         ```
+        
+//         This is **not always true**.
+        
+//         A nested loop is only `O(n²)` if the inner loop starts over from the beginning every time.
+        
+//         Example
+        
+//         ```java
+//         for(int i=0;i<n;i++){
+//             for(int j=0;j<n;j++){
+//             }
+//         }
+//         ```
+        
+//         Here,
+        
+//         for every `i`, `j` runs from `0` to `n-1`.
+        
+//         Total work:
+        
+//         ```
+//         n × n
+        
+//         O(n²)
+//         ```
+        
+//         Your algorithm is different.
+        
+//         The pointers only move in one direction.
+        
+//         ```
+//         left
+        
+//         1 → 2 → 3 → 4 → 5 → 6
+//         ```
+        
+//         It never restarts from `1`.
+        
+//         Similarly,
+        
+//         ```
+//         right
+        
+//         9 → 8 → 7 → 6 → 5
+//         ```
+        
+//         It never returns to `9`.
+        
+//         Therefore,
+        
+//         even though there are nested `while` loops,
+        
+//         the total pointer movement is still
+        
+//         ```
+//         O(n)
+//         ```
+        
+//         for one iteration of `i`.
+        
+//         ---
+        
+//         # Overall Time Complexity
+        
+//         ## Sorting
+        
+//         ```
+//         O(n log n)
+//         ```
+        
+//         ## Outer Loop
+        
+//         ```
+//         O(n)
+//         ```
+        
+//         ## Two-Pointer Search
+        
+//         For every `i`,
+        
+//         ```
+//         left + right together move at most n times.
+//         ```
+        
+//         Therefore,
+        
+//         ```
+//         O(n)
+//         ```
+        
+//         per iteration.
+        
+//         Overall
+        
+//         ```
+//         O(n) × O(n)
+        
+//         =
+        
+//         O(n²)
+//         ```
+        
+//         Finally,
+        
+//         ```
+//         Sorting
+        
+//         O(n log n)
+        
+//         +
+        
+//         Searching
+        
+//         O(n²)
+        
+//         =
+        
+//         O(n²)
+//         ```
+        
+//         The `O(n²)` term dominates.
+        
+//         ---
+        
+//         # Space Complexity
+        
+//         Ignoring the returned list:
+        
+//         Sorting recursion:
+        
+//         ```
+//         O(log n)
+//         ```
+        
+//         Variables:
+        
+//         ```
+//         i
+//         left
+//         right
+//         ```
+        
+//         All use
+        
+//         ```
+//         O(1)
+//         ```
+        
+//         Auxiliary Space:
+        
+//         ```
+//         O(log n)
+//         ```
+        
+//         ---
+        
+//         # Output Space
+        
+//         The returned list stores all valid triplets.
+        
+//         In the worst case, the number of triplets can grow quadratically.
+        
+//         Therefore,
+        
+//         ```
+//         Output Space
+        
+//         O(n²)
+//         ```
+        
+//         ---
+        
+//         # Final Complexity Summary
+        
+//         | Step                  | Time Complexity  | Space Complexity |
+//         | --------------------- | ---------------- | ---------------- |
+//         | Create Result List    | O(1)             | O(1)             |
+//         | Sort Array            | O(n log n)       | O(log n)         |
+//         | Outer `for` Loop      | O(n)             | O(1)             |
+//         | Duplicate Check       | O(1)             | O(1)             |
+//         | Two-Pointer `while`   | O(n) per `i`     | O(1)             |
+//         | Skip Left Duplicates  | Included in O(n) | O(1)             |
+//         | Skip Right Duplicates | Included in O(n) | O(1)             |
+//         | Add Triplet           | O(1)             | O(1)             |
+        
+//         **Overall Time Complexity:** `O(n²)`
+        
+//         **Auxiliary Space Complexity (excluding the returned list):** `O(log n)`
+        
+//         **Space Complexity including the returned result:** Up to `O(n²)` in the worst case.
+		
+		
+		
+		
+		
+		
+		
+		
 		List<List<Integer>> list = new ArrayList<List<Integer>>();
 		
 		Arrays.sort(nums);
 		
-		for(int i = 0; i < nums.length; i++){
+		for(int i = 0; i < nums.length - 2; i++){
 			
 			int left = i + 1;
 			int right = nums.length - 1;
-			boolean b = false;
 			
-			for(int k = 0; k < list.size(); k++){
-			    
-			    if(nums[i] == list.get(k).get(0)){
-			        b = true;
-			    }
-			        
-			}
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
 			
-			if(b==true)
-			    continue;
-			    
 			while(left < right){
 				
 				if(nums[left] + nums[right] == -(nums[i]) ){
+				    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    
+                    while (left < right && nums[right] == nums[right - 1]) {
+                        right--;
+                    }
 					list.add(Arrays.asList(nums[i], nums[left], nums[right]));
 					left++;
 					right--;
@@ -76,10 +816,8 @@ public class Main{
 					left++;	
 				}	
 			}
-		}
-		
+		}		
 		return list;
-		
 	}
 
 	public static void main(String []args){
