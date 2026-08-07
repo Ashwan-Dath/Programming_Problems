@@ -1,3 +1,6 @@
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxx
 // Array Input Code.
 // import java.util.Scanner;
 // Scanner sc = new Scanner(System.in);
