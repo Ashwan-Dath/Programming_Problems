@@ -1,0 +1,150 @@
+// Triplets with Smaller Sum
+
+// Given an array arr[] of distinct integers and a value sum, 
+// find the count of triplets (i, j, k), having (i<j<k) 
+// with the sum of (arr[i] + arr[j] + arr[k]) smaller than the given value sum.
+
+// Examples :
+// Input: sum = 2, arr[] = [-2, 0, 1, 3]
+// Output:  2
+// Explanation: Triplets with sum less than 2 are (-2, 0, 1) and (-2, 0, 3). 
+
+// Input: sum = 12, arr[] = [5, 1, 3, 4, 7]
+// Output: 4
+// Explanation: Triplets with sum less than 12 are (1, 3, 4), (5, 1, 3), (1, 3, 7) and (5, 1, 4).
+
+// Constraints:
+// 1 ≤ sum ≤ 105
+// 3 ≤ arr.size() ≤ 103
+// -103 ≤ arr[i] ≤ 103
+
+import java.util.Arrays;
+
+public class Main
+{
+    
+    static int countTriplets(int sum, int arr[]) {
+        
+        // Approach 2:
+        // - First, sort the array to use the two-pointer technique.
+        // - Fix the first element using a for loop.
+        // - For every fixed element:
+        //      1. Set left = i + 1.
+        //      2. Set right = arr.length - 1.
+        // - Calculate the sum of the three elements:
+        //      allsum = arr[i] + arr[left] + arr[right].
+        //
+        // - If allsum < sum:
+        //      • Since the array is sorted, every element between
+        //        left and right can also form a valid triplet with
+        //        arr[i] and arr[left].
+        //      • Therefore, there are (right - left) valid triplets.
+        //      • Add (right - left) to count.
+        //      • Move left++ to check the next possibility.
+        //
+        // - If allsum >= sum:
+        //      • The current sum is too large.
+        //      • Move right-- to reduce the sum.
+        //
+        // - Continue until left and right meet.
+        // - Repeat this process for every possible arr[i].
+        // - Finally, return count.
+        
+        // Time Complexity: O(n^2)
+        // - Sorting the array takes O(n log n).
+        // - The outer for loop runs O(n) times.
+        // - For each iteration, the two pointers traverse the array
+        //   in O(n) time.
+        // - Therefore:
+        //      O(n log n) + O(n^2) = O(n^2)
+        // - So the final time complexity is O(n^2).
+        
+        // Space Complexity: O(1)
+        // - Only a few integer variables are used.
+        // - No extra arrays or data structures are created.
+        // - Arrays.sort() sorts the input array in place for int[].
+        // - Therefore, the extra space complexity is O(1).
+        int count = 0;
+        
+        Arrays.sort(arr);
+        
+        for(int i = 0; i < arr.length - 2; i++){
+            
+            int left = i + 1;
+            int right = arr.length - 1;
+            while(left < right){
+                
+                int allsum = arr[i] + arr[left] + arr[right];
+                
+                if(allsum < sum){
+                    count = count + (right - left);
+                    left++;
+                }else{
+                    right--;
+                }
+            }
+            
+        }
+        
+        
+        return count;
+        
+        
+        
+
+        // Approach 1:
+        // - Use three nested loops to consider every possible triplet.
+        // - The first loop selects the first element.
+        // - The second loop selects the second element.
+        // - The third loop selects the third element.
+        // - Calculate the sum of the three elements:
+        //      allSum = arr[i] + arr[j] + arr[k].
+        // - If allSum < sum:
+        //      • Increment count because the triplet is valid.
+        // - Otherwise:
+        //      • Break because the array is sorted and further elements
+        //        will only make the sum larger.
+        // - Continue until all possible triplets are checked.
+        // - Finally, return count.
+        
+        // Time Complexity: O(n^3)
+        // - There are three nested loops.
+        // - Each loop can run up to O(n) times.
+        // - Therefore, the total time complexity is O(n^3).
+        
+        // Space Complexity: O(1)
+        // - Only a few integer variables are used.
+        // - No extra arrays or data structures are created.
+        // - Therefore, the extra space complexity is O(1).
+        // ----------------------------------------
+        
+        // int count = 0;
+        
+        // for(int i = 0; i < arr.length; i++){
+        //     for(int j = i + 1; j < arr.length; j++){
+        //         for(int k = j + 1; k < arr.length; k++){
+        //             int allSum = arr[i] + arr[j] + arr[k];
+        //             if(allSum < sum)
+        //                 count++;
+        //             else 
+        //                 break;
+        //         }
+        //     }
+        // }
+        
+        // return count;
+    }
+
+	public static void main(String[] args) {
+	    
+	    // Input: sum = 2, arr[] = [-2, 0, 1, 3]
+// Output:  2
+// Input: sum = 12, arr[] = [5, 1, 3, 4, 7]
+// Output: 4
+
+	    int target = 12;
+	    int arr[] = {5, 1, 3, 4, 7};
+	    int value = countTriplets(target, arr);
+		System.out.println("Hello World : " + value);
+	}
+}
