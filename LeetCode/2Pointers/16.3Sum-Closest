@@ -1,0 +1,116 @@
+// 16. 3Sum Closest
+
+// Given an integer array nums of length n and an integer target, 
+// find three integers at distinct indices in nums such that the sum is closest to target.
+
+// Return the sum of the three integers.
+
+// You may assume that each input would have exactly one solution.
+
+ 
+
+// Example 1:
+// Input: nums = [-1,2,1,-4], target = 1
+// Output: 2
+// Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+
+// Example 2:
+// Input: nums = [0,0,0], target = 1
+// Output: 0
+// Explanation: The sum that is closest to the target is 0. (0 + 0 + 0 = 0).
+ 
+
+// Constraints:
+// 3 <= nums.length <= 500
+// -1000 <= nums[i] <= 1000
+// -104 <= target <= 104
+
+
+// import java.util.Math;
+import java.util.Arrays;
+
+public class Main
+{
+    
+    public static int threeSumClosest(int[] nums, int target) {
+        
+        
+        // Approach:
+        // - First, sort the array so that we can use the two-pointer technique.
+        // - Use a for loop to fix the first element (nums[i]).
+        // - For every fixed element:
+        //      1. Set left = i + 1.
+        //      2. Set right = nums.length - 1.
+        // - Calculate the sum of the three numbers:
+        //      sum = nums[i] + nums[left] + nums[right].
+        // - Calculate the difference between the current sum and target:
+        //      diff = Math.abs(sum - target).
+        // - If this difference is smaller than the previous closest difference:
+        //      • Update closest = diff.
+        //      • Update threeSum = sum.
+        // - Move the pointers based on the current sum:
+        //      • If sum > target, move right-- to make the sum smaller.
+        //      • If sum < target, move left++ to make the sum larger.
+        //      • If sum == target, return immediately because we found
+        //        the exact target.
+        // - Continue until all possible values of i are checked.
+        // - Finally, return threeSum, which is the sum closest to target.
+        
+        // Time Complexity: O(n^2)
+        // - Sorting the array takes O(n log n).
+        // - The outer for loop runs O(n) times.
+        // - For each iteration, the two pointers traverse the remaining
+        //   array in O(n) time.
+        // - Therefore, the total time complexity is O(n^2).
+        
+        // Space Complexity: O(1)
+        // - Only a few integer variables are used.
+        // - No extra arrays or data structures are created.
+        // - Therefore, the algorithm uses O(1) extra space.
+        // - Note: Arrays.sort() may use internal stack space depending
+        //   on the Java implementation, but the algorithm itself uses O(1)
+        //   extra space.
+        
+        int closest = Integer.MAX_VALUE;
+        int threeSum = 0;
+        Arrays.sort(nums);
+
+        for(int i = 0; i < nums.length - 2; i++){
+            
+            int left = i + 1;
+            int right = nums.length - 1;
+            
+            while(left < right){
+
+                int sum = nums[i] + nums[left] + nums[right];
+                
+                int diff = Math.abs(sum - target);
+                
+                if(diff < closest){
+                    
+                    closest = diff;
+                    threeSum = sum;
+                }
+    
+                if(sum > target){
+                    right--;
+                }else if(sum < target){
+                    left++;
+                }else{
+                    return sum;
+                }
+                
+            }
+        }
+        return threeSum;
+    }
+
+	public static void main(String[] args) {
+	    
+
+	    int target = 0;
+	    int arr[] = {-4,2,2,3,3,3};
+	    int value = threeSumClosest(arr, target);
+		System.out.println("Hello World : " + value);
+	}
+}
