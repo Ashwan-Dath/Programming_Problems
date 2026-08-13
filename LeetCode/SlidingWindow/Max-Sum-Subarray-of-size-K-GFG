@@ -24,42 +24,52 @@
 
 public class Main
 {
-    public static int maxSubarraySum(int[] arr, int k) {
-        int left = 0;
-        int right = k - 1;
-        int sumMax = 0;
-        int sum = 0;
-        
-        for(int i = left; i <= right; i++)
-            sum += arr[i];
-        
-        System.out.println("first Sum " + sum);
-        
-        while(right < arr.length){
-            sumMax = Math.max(sum, sumMax);
+	public static int maxSubarraySum(int[] arr, int k) {
 
-            left++;
-            right++;
-            
-            if(right == arr.length){
-                System.out.println("Breaked" + right + " " + left);
-                break;
-                
-            }
-            
-            sum = sum - arr[left - 1] + arr[right];
-            System.out.println("Second SUm : " + sum);
-            System.out.println("MAxSUm " + sumMax);
-        }
-        
-        return sumMax;
-    }
+		// Approach - Sliding Window
+		// We take a window of size k and calculate the sum of the first k elements.
+		// Then we slide the window one element at a time.
+		// For every slide, we remove the element going out of the window
+		// and add the new element coming into the window.
+		// This avoids recalculating the entire window sum every time.
+		// We keep updating sumMax with the maximum window sum found.
+		//
+		// Time Complexity - O(n)
+		// We traverse the array once. Each element is added and removed at most once.
+		//
+		// Space Complexity - O(1)
+		// We only use a few variables and no extra data structure.
+		// -------------------------------------------------
+
+		int left = 0;
+		int right = k - 1;
+		int sumMax = 0;
+		int sum = 0;
+
+		for(int i = left; i <= right; i++)
+			sum += arr[i];
+
+		while(right < arr.length) {
+			sumMax = Math.max(sum, sumMax);
+
+			left++;
+			right++;
+
+			if(right == arr.length) {
+				break;
+
+			}
+
+			sum = sum - arr[left - 1] + arr[right];
+		}
+
+		return sumMax;
+	}
 
 	public static void main(String[] args) {
-	   // int arr[] = {1, 4, 2, 10, 23, 3, 1, 0, 20};
-	    int arr[] = {100 ,200, 300, 400};
-	    int k = 4;
-	    int val = maxSubarraySum(arr, k);
-		System.out.println("Hello World : " + val);
+		int arr[] = {100,200, 300, 400};
+		int k = 4;
+		int val = maxSubarraySum(arr, k);
+		System.out.println("Max Sum : " + val);
 	}
 }
