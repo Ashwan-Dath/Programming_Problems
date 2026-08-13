@@ -1,0 +1,65 @@
+// Max Sum Subarray of size K
+
+// Given an array of integers arr[]  and a number k. Return the maximum sum of a subarray of size k.
+
+// Note: A subarray is a contiguous part of any given array.
+
+// Examples:
+// Input: arr[] = [100, 200, 300, 400], k = 2
+// Output: 700
+// Explanation: arr2 + arr3 = 700, which is maximum.
+
+// Input: arr[] = [1, 4, 2, 10, 23, 3, 1, 0, 20], k = 4
+// Output: 39
+// Explanation: arr1 + arr2 + arr3 + arr4 = 39, which is maximum.
+
+// Input: arr[] = [100, 200, 300, 400], k = 1
+// Output: 400
+// Explanation: arr3 = 400, which is maximum.
+
+// Constraints:
+// 1 ≤ arr.size() ≤ 106
+// 0 ≤ arr[i] ≤ 106
+// 1 ≤ k ≤ arr.size()
+
+public class Main
+{
+    public static int maxSubarraySum(int[] arr, int k) {
+        int left = 0;
+        int right = k - 1;
+        int sumMax = 0;
+        int sum = 0;
+        
+        for(int i = left; i <= right; i++)
+            sum += arr[i];
+        
+        System.out.println("first Sum " + sum);
+        
+        while(right < arr.length){
+            sumMax = Math.max(sum, sumMax);
+
+            left++;
+            right++;
+            
+            if(right == arr.length){
+                System.out.println("Breaked" + right + " " + left);
+                break;
+                
+            }
+            
+            sum = sum - arr[left - 1] + arr[right];
+            System.out.println("Second SUm : " + sum);
+            System.out.println("MAxSUm " + sumMax);
+        }
+        
+        return sumMax;
+    }
+
+	public static void main(String[] args) {
+	   // int arr[] = {1, 4, 2, 10, 23, 3, 1, 0, 20};
+	    int arr[] = {100 ,200, 300, 400};
+	    int k = 4;
+	    int val = maxSubarraySum(arr, k);
+		System.out.println("Hello World : " + val);
+	}
+}
