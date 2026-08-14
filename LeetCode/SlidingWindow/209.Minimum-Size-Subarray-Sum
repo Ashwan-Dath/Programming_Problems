@@ -1,0 +1,228 @@
+// 209. Minimum Size Subarray Sum
+
+// Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.
+
+
+
+// Example 1:
+// Input: target = 7, nums = [2,3,1,2,4,3]
+// Output: 2
+// Explanation: The subarray [4,3] has the minimal length under the problem constraint.
+
+// Example 2:
+// Input: target = 4, nums = [1,4,4]
+// Output: 1
+
+// Example 3:
+// Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+// Output: 0
+
+
+// Constraints:
+// 1 <= target <= 109
+// 1 <= nums.length <= 105
+// 1 <= nums[i] <= 104
+
+
+// Follow up: If you have figured out the O(n) solution, 
+// try coding another solution of which the time complexity is O(n log(n)).
+
+
+
+public class Main {
+
+	static int subArraySum(int []arr, int target) {
+	    
+        // Variable Size Sliding Window
+        //
+        // low  -> points to the start of the current window
+        // high -> points to the end of the current window
+        //
+        // We maintain the sum of the current window.
+        //
+        // Initially, both low and high are 0 and sum is 0.
+        //
+        // Expand the window by adding nums[high] to sum.
+        // We continue expanding until sum becomes greater than
+        // or equal to target.
+        //
+        // Once sum >= target, the current window is a valid window.
+        // We calculate its length and update minLen.
+        //
+        // Then we shrink the window from the left by removing
+        // nums[low] and incrementing low.
+        //
+        // We keep shrinking while sum >= target because there
+        // may be a smaller valid window.
+        //
+        // When sum becomes less than target, we stop shrinking
+        // and expand the window again by moving high forward.
+        //
+        // Since all numbers in nums are positive, increasing the
+        // window always increases the sum and decreasing the
+        // window always decreases the sum.
+        //
+        // If no valid window is found, minLen remains
+        // Integer.MAX_VALUE, so we return 0.
+        //
+        // Time Complexity: O(n)
+        //
+        // Although there is a for loop and a while loop,
+        // it is still O(n) because low and high only move
+        // forward and each element is added and removed at most once.
+        //
+        // Space Complexity: O(1)
+        //
+        // We only use a few variables (low, high, minLen, sum)
+        // and do not use any additional data structure.
+        // ---------------------------------------------------------
+
+        int low = 0;
+        int high = 0;
+        int minLen = Integer.MAX_VALUE;
+
+        int sum = 0;
+
+        for(int i = high; i < nums.length; i++){
+
+            sum += nums[high];
+
+            while(sum >= target){
+                minLen = Math.min(minLen, (high - low + 1));
+                sum -= nums[low];
+                low++;
+
+            }
+            high++;
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+
+	    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// Approach 1
+		// Brute Force Approach
+		//
+		// We consider every index as the starting point of a subarray.
+		//
+		// The outer loop (i) represents the starting index.
+		//
+		// For every starting index, the inner loop (j) expands the
+		// subarray towards the right and keeps calculating its sum.
+		//
+		// sum       -> stores the sum of the current subarray
+		// minArrLen -> stores the length of the current subarray
+		//
+		// Whenever the sum becomes greater than or equal to target,
+		// we have found a valid subarray.
+		//
+		// We compare its length with minSubArray and keep the
+		// smallest length found so far.
+		//
+		// We continue the inner loop because there may be a smaller
+		// valid subarray starting at the same index.
+		//
+		// After checking all possible starting positions, if
+		// minSubArray is still Integer.MAX_VALUE, it means no
+		// subarray has a sum greater than or equal to target,
+		// so we return 0.
+		//
+		// Time Complexity: O(n²)
+		//
+		// The outer loop can run n times and for each starting
+		// position the inner loop can also run up to n times.
+		//
+		// Space Complexity: O(1)
+		//
+		// We only use a few variables and do not use any
+		// additional data structure.// Brute Force Approach
+		//
+		// We consider every index as the starting point of a subarray.
+		//
+		// The outer loop (i) represents the starting index.
+		//
+		// For every starting index, the inner loop (j) expands the
+		// subarray towards the right and keeps calculating its sum.
+		//
+		// sum       -> stores the sum of the current subarray
+		// minArrLen -> stores the length of the current subarray
+		//
+		// Whenever the sum becomes greater than or equal to target,
+		// we have found a valid subarray.
+		//
+		// We compare its length with minSubArray and keep the
+		// smallest length found so far.
+		//
+		// We continue the inner loop because there may be a smaller
+		// valid subarray starting at the same index.
+		//
+		// After checking all possible starting positions, if
+		// minSubArray is still Integer.MAX_VALUE, it means no
+		// subarray has a sum greater than or equal to target,
+		// so we return 0.
+		//
+		// Time Complexity: O(n²)
+		//
+		// The outer loop can run n times and for each starting
+		// position the inner loop can also run up to n times.
+		//
+		// Space Complexity: O(1)
+		//
+		// We only use a few variables and do not use any
+		// additional data structure.
+		// -------------------------------------------------
+
+// 		int minSubArray = Integer.MAX_VALUE;
+
+// 		for(int i = 0; i < arr.length; i++) {
+// 			int sum = 0;
+// 			int minArrLen = 0;
+// 			for(int j = i; j < arr.length; j++) {
+// 				sum = sum + arr[j];
+// 				minArrLen++;
+// 				if(sum >= target && minSubArray >= minArrLen) {
+// 					minSubArray = minArrLen;
+// 				}
+// 			}
+// 		}
+
+
+// 		return minSubArray == Integer.MAX_VALUE ? 0 : minSubArray;
+	}
+
+	public static void main(String[] args) {
+		// 		Input: target = 7, nums = [2,3,1,2,4,3]
+		// Output: 2
+
+		// Input: target = 4, nums = [1,4,4]
+		// Output: 1
+
+		// Input: target = 11, nums = [1,1,1,1,1,1,1,1]
+		// Output: 0
+
+		int target =  5;
+		int arr[] = {1,4,4};
+		int value = subArraySum(arr, target);
+		System.out.println("Value " + value);
+	}
+
+
+}
