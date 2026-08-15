@@ -1,0 +1,120 @@
+// Longest Substring with K Uniques
+
+// You are given a string s consisting only lowercase alphabets and an integer k.
+// Your task is to find the length of the longest substring that contains exactly k distinct characters.
+
+// Note : If no such substring exists, return -1.
+
+
+// Examples:
+
+// Input: s = "aabacbebebe", k = 3
+// Output: 7
+// Explanation: The longest substring with exactly 3 distinct characters is "cbebebe",
+// which includes 'c', 'b', and 'e'.
+
+// Input: s = "aaaa", k = 2
+// Output: -1
+// Explanation: There's no substring with 2 distinct characters.
+
+// Input: s = "aabaaab", k = 2
+// Output: 7
+// Explanation: The entire string "aabaaab" has exactly 2 unique characters 'a' and 'b',
+// making it the longest valid substring.
+
+// Constraints:
+// 1 ≤ s.size() ≤ 105
+// 1 ≤ k ≤ 26
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main
+{
+	public static int longestKSubstr(String s, int k) {
+	    
+	    
+	    /*
+        APPROACH:
+        Use Sliding Window + HashMap.
+        
+        - 'high' expands the window and adds characters to the HashMap.
+        - If distinct characters > k, move 'low' to shrink the window.
+        - When distinct characters == k, update the maximum window length.
+        
+        TIME COMPLEXITY:
+        O(N)
+        Both 'low' and 'high' move through the string at most once.
+        
+        SPACE COMPLEXITY:
+        O(K)
+        HashMap stores the characters in the current window.
+        */
+		int low = 0;
+		int high = 0;
+		int maxLen = Integer.MIN_VALUE;
+		String dup = "";
+		HashMap<Character, Integer> count = new HashMap<>();
+
+		while(high < s.length()) {
+
+			
+			char temp = s.charAt(high);
+			count.put(temp, count.getOrDefault(temp, 0) +1);
+			
+			while(count.size() > k) {
+			    
+				char tempChar = s.charAt(low);
+				
+				count.put(tempChar, count.get(tempChar) - 1);
+				
+				if (count.get(tempChar) == 0) {
+					count.remove(tempChar);
+				}
+				
+				low++;
+				
+			}
+			
+			if (count.size() == k) {
+                maxLen = Math.max(maxLen, high - low + 1);
+            }
+            
+			high++;
+		}
+		
+		return maxLen == Integer.MIN_VALUE ? -1 : maxLen;
+	}
+
+	public static void main(String[] args) {
+		// Input: s = "aabacbebebe", k = 3
+		// Output: 7
+
+		// Input: s = "aaaa", k = 2
+		// Output: -1
+
+		// Input: s = "aabaaab", k = 2
+		// Output: 7
+		
+        // Constraints:
+        // 1 ≤ s.size() ≤ 105
+        // 1 ≤ k ≤ 26
+        
+        Scanner sc = new Scanner(System.in);
+		String s = sc.next();
+		int k = sc.nextInt();
+		
+		if(s.length() < 1 || s.length() > 105){
+		    System.out.println("String length should be in between 1 to 105");
+		    return;
+		}
+		
+		if(k < 1 || k > 26){
+		    System.out.println("K should be in between 1 to 26");
+		    return;
+		}
+		
+		int val = longestKSubstr(s, k);
+		System.out.println("VAL " + val);
+	}
+}
