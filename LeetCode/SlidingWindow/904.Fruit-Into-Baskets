@@ -1,0 +1,154 @@
+// 904. Fruit Into Baskets
+
+// You are visiting a farm that has a single row of fruit trees arranged from left to right.
+// The trees are represented by an integer array fruits where fruits[i] is the
+// type of fruit the ith tree produces.
+
+// You want to collect as much fruit as possible. However, the owner has some strict rules
+// that you must follow:
+
+// You only have two baskets, and each basket can only hold a single type of fruit.
+// There is no limit on the amount of fruit each basket can hold.
+
+// Starting from any tree of your choice, you must pick exactly one fruit from every tree
+// (including the start tree) while moving to the right. 
+// The picked fruits must fit in one of your baskets.
+
+// Once you reach a tree with fruit that cannot fit in your baskets, you must stop.
+// Given the integer array fruits, return the maximum number of fruits you can pick.
+
+
+
+// Example 1:
+// Input: fruits = [1,2,1]
+// Output: 3
+// Explanation: We can pick from all 3 trees.
+
+// Example 2:
+// Input: fruits = [0,1,2,2]
+// Output: 3
+// Explanation: We can pick from trees [1,2,2].
+// If we had started at the first tree, we would only pick from trees [0,1].
+
+// Example 3:
+// Input: fruits = [1,2,3,2,2]
+// Output: 4
+// Explanation: We can pick from trees [2,3,2,2].
+// If we had started at the first tree, we would only pick from trees [1,2].
+
+
+// Constraints:
+// 1 <= fruits.length <= 105
+// 0 <= fruits[i] < fruits.length
+
+
+
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main {
+
+    public static int totalFruit(int[] fruits) {
+
+        /*
+            APPROACH:
+            Use Sliding Window + HashMap.
+            
+            - 'high' expands the window and adds the current fruit to the HashMap.
+            - HashMap stores: fruit type -> frequency.
+            - If the window contains more than 2 fruit types, move 'low'
+              forward and decrease the frequency of fruits.
+            - Remove a fruit from the HashMap when its frequency becomes 0.
+            - When the window has at most 2 fruit types, update maxLen.
+            
+            TIME COMPLEXITY:
+            O(N)
+            Both 'low' and 'high' move from left to right at most N times.
+            HashMap operations are O(1) on average.
+            
+            SPACE COMPLEXITY:
+            O(1)
+            The HashMap stores at most 2 distinct fruit types.
+            */
+
+
+        int low = 0;
+        int high = 0;
+        int maxLen = 0;
+        HashMap<Integer, Integer> check = new HashMap<>();
+        
+        while(high < fruits.length){
+            
+
+            // if(check.get(fruits[high])){
+            System.out.println("high : " + high);
+            check.put(fruits[high], ( check.getOrDefault(fruits[high], 0) + 1) );
+            // }
+            System.out.println("Check : " + check);
+            
+            while(check.size() > 2){
+                
+                check.put(fruits[low], (check.get(fruits[low]) - 1));
+                System.out.println("in side while Check : " + check);
+                System.out.println("low : " + low);
+                
+                if(check.get(fruits[low]) == 0){
+                    check.remove(fruits[low]);
+                }
+                
+                low++;
+            }
+            
+            maxLen = Math.max(maxLen, (high - low + 1));
+            
+            high++;
+            
+            // maxLen = Math.max(maxLen, (high - low + 1));
+        }
+        return maxLen;
+    }
+
+	public static void main(String []args) {
+	    
+// 		Scanner sc = new Scanner(System.in);
+		
+// 		System.out.print("Enter the Size of the Array : ");
+// 		int size = sc.nextInt();
+		
+// 		if(size< 1 || size > 105){
+// 		    System.out.println("The array size should be in between 1 to 105");
+// 		    return;
+// 		}
+
+// 		int[] inputArr = new int[size];
+// 		for (int i = 0; i < size; i++) {
+// 			System.out.printf("Enter the %d element in the Array : ", (i + 1));
+// 			inputArr[i] = sc.nextInt();
+// 		}
+        
+        
+        // Input: fruits = [1,2,1] // Output: 3
+
+        // Input: fruits = [0,1,2,2] // Output: 3
+        
+        // Input: fruits = [1,2,3,2,2] // Output: 4
+        
+//         Input fruits =  [3,3,3,1,2,1,1,2,3,3,4]
+// Output  7 // Expected 5
+
+// Input fruits = [0]
+// Output  -2147483648 // Expected  1
+
+        
+        // int []inputArr = {0,1,2,2};
+        // int []inputArr = {1,2,3,2,2};
+        int []inputArr = {0};
+
+        int value = totalFruit(inputArr);
+        
+        System.out.println("value : " + value);
+        
+
+	}
+}
