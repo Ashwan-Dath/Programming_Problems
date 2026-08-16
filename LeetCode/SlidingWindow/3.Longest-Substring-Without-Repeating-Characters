@@ -1,0 +1,137 @@
+// 3. Longest Substring Without Repeating Characters
+
+// Given a string s, find the length of the longest substring without duplicate characters.
+// A substring is a contiguous non-empty sequence of characters within a string.
+ 
+
+// Example 1:
+// Input: s = "abcabcbb"
+// Output: 3
+// Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+
+// Example 2:
+// Input: s = "bbbbb"
+// Output: 1
+// Explanation: The answer is "b", with the length of 1.
+
+// Example 3:
+// Input: s = "pwwkew"
+// Output: 3
+// Explanation: The answer is "wke", with the length of 3.
+// Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+ 
+
+
+// Constraints:
+// 0 <= s.length <= 105
+// s consists of English letters, digits, symbols and spaces.
+
+
+
+import java.util.Scanner;
+import java.util.HashMap;
+
+public class Main{
+    public static void main(String[] args){
+// 		Scanner sc = new Scanner(System.in);
+
+// " " = 1
+// "dvdf" = 2
+// "dv d" = 3
+// "ckilbkd" = 5
+// "tmmzuxt" = 5
+// "jbpnbwwd" = 4
+// "anviaj" = 5
+
+// Input s = " _&/" 
+// Output 3 Expected 4
+
+        String s = " ";
+        
+        int value = lengthOfLongestSubstring(s);
+        
+        System.out.println("value : " + value);
+    }
+    
+    
+    
+    public static int lengthOfLongestSubstring(String s) {
+         /*
+        APPROACH:
+        Use Sliding Window + HashMap.
+        
+        - 'low' and 'high' represent the current window.
+        - 'high' expands the window by adding characters to the HashMap.
+        - HashMap stores each character and its frequency.
+        - If a character's frequency becomes greater than 1,
+          move 'low' forward until the duplicate is removed.
+        - After removing duplicates, calculate the current window length.
+        - Keep updating maxLen with the maximum window length found.
+        
+        
+        PROCESS:
+        1. Add s[high] to the HashMap.
+        2. If the current character is duplicated, shrink the window
+           from the left using 'low'.
+        3. Decrease the frequency of each removed character.
+        4. Remove a character from the HashMap when its frequency becomes 0.
+        5. Calculate window length:
+           
+           high - low + 1
+        
+        6. Update maxLen.
+        7. Move 'high' to the next character.
+        
+        
+        TIME COMPLEXITY:
+        O(N)
+        
+        - 'high' moves from left to right at most N times.
+        - 'low' also moves from left to right at most N times.
+        - HashMap get(), put() and remove() are O(1) on average.
+        
+        Therefore, total time complexity is O(N).
+        
+        
+        SPACE COMPLEXITY:
+        O(K)
+        
+        - HashMap stores the characters present in the current window.
+        - K = number of distinct characters.
+        
+        For a fixed character set such as ASCII/English characters,
+        this can be considered O(1).
+        */
+
+
+
+        int maxLen = 0;
+        int low = 0;
+        int high = 0;
+        HashMap <Character, Integer> check = new HashMap<>();
+        
+        while(high < s.length()){
+            
+            char temp = s.charAt(high);
+            check.put(temp, (check.getOrDefault(temp, 0) + 1));
+            
+            while(check.get(temp) > 1){
+                
+                char lowTemp = s.charAt(low);
+                check.put(lowTemp, (check.get(lowTemp) - 1));
+                
+                if(check.get(lowTemp) == 0){
+                    check.remove(lowTemp);
+                }
+                
+                low++;
+                
+            }
+            
+            maxLen = Math.max(maxLen, (high - low + 1));
+            high++;
+        }
+        
+        return maxLen;
+    }
+}
