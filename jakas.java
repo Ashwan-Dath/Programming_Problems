@@ -15,7 +15,7 @@
 
 
 
-
+// checking for the commit
 
 // 	public static boolean ValidBinary(String number){
 // 	    for(int i=0; i<number.length(); i++){
