@@ -1,10 +1,10 @@
 // 76. Minimum Window Substring
-// Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that 
+// Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that
 // every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 
 // The testcases will be generated such that the answer is unique.
 
- 
+
 // Example 1:
 // Input: s = "ADOBECODEBANC", t = "ABC"
 // Output: "BANC"
@@ -20,7 +20,7 @@
 // Output: ""
 // Explanation: Both 'a's from t must be included in the window.
 // Since the largest window of s only has one 'a', return empty string.
- 
+
 
 // Constraints:
 
@@ -28,92 +28,134 @@
 // n == t.length
 // 1 <= m, n <= 105
 // s and t consist of uppercase and lowercase English letters.
- 
+
 
 // Follow up: Could you find an algorithm that runs in O(m + n) time?
 
 
 import java.util.HashMap;
 
-public class Main{
-    
-    static boolean allCheck(HashMap<Character, Integer> original, HashMap<Character, Integer> compare){
-        System.out.println();
-        for(Character val: original.keySet()){
-            System.out.print(" val " + val);
-            System.out.print(" original.get(val) " + original.get(val));
-            // System.out.print(" compare.get(val) " + compare.get(.val));
-            System.out.print(" compare.getOrDefault(val, 0) " + compare.getOrDefault(val, 0));
-            if(compare.getOrDefault(val, 0) < original.get(val)){
-                System.out.println();
-                return false;
-            }
-            
-        }
-        return true;
-    }
-    
-    public static void main(String[] args){
-        
-// Input: s = "ADOBECODEBANC", t = "ABC"
-// Output: "BANC"
+public class Main {
 
-        String s = "ADOBECODEBANC";
-        String t = "ABC";
-        int start = 0;
-        int end = 0;
-        int MinLen = Integer.MAX_VALUE;
-        int low = 0;
-        int high = 0;
-        HashMap<Character, Integer> original = new HashMap<>();
-        HashMap<Character, Integer> compare = new HashMap<>();
-        
-        for(int i = 0; i < t.length(); i++){
-            original.put(t.charAt(i) ,(original.getOrDefault(t.charAt(i), 0) +1));
-        }
-        
-        System.out.println(original);
-        
-        while(high < s.length()){
-            
-            char hchar = s.charAt(high);
-            
-            if(original.containsKey(hchar)){
-                compare.put(hchar ,(compare.getOrDefault(hchar, 0) +1));
-                // compare.put(hchar, checker.get(hchar) + 1);
-            }
-            
-            boolean b = allCheck(original, compare);
-            System.out.println("B " + b);
-            while(b){
-                int length = high - low + 1;
-                
-                if(MinLen > length){
-                    MinLen = length;
-                    start = low;
-                    end = high;
-                    System.out.print(" start " + start + " end " + end);
-                }
-                // MinLen = Math.min(MinLen, length);
-                // if(MinLen  <)
-                
-                char lchar = s.charAt(low);
-                if(original.containsKey(lchar)){
-                    compare.put(lchar ,(compare.get(lchar) -1));
-                }
-                b = allCheck(original, compare);
-                low++;
-            }
 
-            System.out.print(" low " + low + " high " + high);
-            System.out.println("Checker Boolean : " + b + " char : "+ hchar + " MinLen "+ MinLen);
-            high++;
+
+	static boolean allCheck(HashMap<Character, Integer> original, HashMap<Character, Integer> compare) {
+		for(Character val: original.keySet()) {
+			if(compare.getOrDefault(val, 0) < original.get(val)) {
+				return false;
+			}
+
+		}
+		return true;
+	}
+
+	public static String minWindow(String s, String t) {
+	    
+	    
+	    
+	    // Approach - Sliding Window + HashMap
+        // We use two pointers, low and high, to maintain a sliding window in s.
+        //
+        // First, we store the frequency of every character in t using a HashMap.
+        // Then we move high through s and add characters to the current window
+        // whenever they are required by t.
+        //
+        // Whenever the current window contains all the required characters with
+        // the required frequencies, we try to shrink the window from the left
+        // using low to find the minimum valid window.
+        //
+        // We keep track of the smallest valid window using start, end and MinLen.
+        //
+        // The allCheck() method checks whether the current window contains enough
+        // occurrences of every character required by t.
+        //
+        // Since s and t contain only uppercase and lowercase English letters,
+        // there are at most 52 distinct characters. Therefore, allCheck() takes
+        // O(1) time for this problem.
+        //
+        // Both low and high only move forward through s, so each character in s
+        // is processed a constant number of times.
+        //
+        // Time Complexity - O(m + n)
+        // We traverse t once to build the frequency map, which takes O(n).
+        // We then traverse s using the low and high pointers, which takes O(m).
+        // Therefore, the total time complexity is O(m + n).
+        //
+        // Space Complexity - O(1)
+        // We use two HashMaps to store character frequencies.
+        // Since there are only 52 possible uppercase and lowercase English
+        // characters, the HashMaps can contain at most 52 entries.
+        // Therefore, the extra space used is O(1).
+        // -------------------------------------------------
+        
+        
+        
+
+		int start = 0;
+		int end = 0;
+		int MinLen = Integer.MAX_VALUE;
+		int low = 0;
+		int high = 0;
+		HashMap<Character, Integer> original = new HashMap<>();
+		HashMap<Character, Integer> compare = new HashMap<>();
+
+		for(int i = 0; i < t.length(); i++) {
+			original.put(t.charAt(i),(original.getOrDefault(t.charAt(i), 0) +1));
+		}
+
+		while(high < s.length()) {
+
+			char hchar = s.charAt(high);
+
+			if(original.containsKey(hchar)) {
+				compare.put(hchar,(compare.getOrDefault(hchar, 0) +1));
+			}
+
+			boolean b = allCheck(original, compare);
+			while(b) {
+				int length = high - low + 1;
+
+				if(MinLen > length) {
+					MinLen = length;
+					start = low;
+					end = high;
+				}
+
+				char lchar = s.charAt(low);
+				if(original.containsKey(lchar)) {
+					compare.put(lchar,(compare.get(lchar) -1));
+				}
+				b = allCheck(original, compare);
+				low++;
+			}
+
+			high++;
+		}
+
+
+//      In leetcode i have used this StringBuilder but we can use the string itself.
+// 		StringBuilder ret = new StringBuilder();
+
+// 		if (MinLen != Integer.MAX_VALUE) {
+// 			ret.append(s, start, end + 1);
+// 		}
+
+// 		return ret.toString();
+
+        if (MinLen != Integer.MAX_VALUE) {
+            return s.substring(start, end + 1);
         }
         
-        while(start <= end){
-            System.out.print(s.charAt(start++));
-            // ++;
-        }
-    }
+        return "";
+
+	}
+
+	public static void main(String[] args) {
+		String s = "a";
+		String t = "a";
+		
+		String val = minWindow(s, t);
+		System.out.println(val);
+	}
 }
 
