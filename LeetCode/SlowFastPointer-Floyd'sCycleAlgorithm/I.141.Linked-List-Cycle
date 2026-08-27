@@ -1,0 +1,176 @@
+// 141. Linked List Cycle
+
+// Given head, the head of a linked list, determine if the linked list has a cycle in it.
+
+// There is a cycle in a linked list if there is some node in the list 
+// that can be reached again by continuously following the next pointer. Internally, 
+// pos is used to denote the index of the node that tail's next pointer is connected to. 
+// Note that pos is not passed as a parameter.
+
+// Return true if there is a cycle in the linked list. Otherwise, return false.
+
+ 
+
+// Example 1:
+// Input: head = [3,2,0,-4], pos = 1
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 1st node (0-indexed).
+
+// Example 2:
+// Input: head = [1,2], pos = 0
+// Output: true
+// Explanation: There is a cycle in the linked list, where the tail connects to the 0th node.
+
+// Example 3:
+// Input: head = [1], pos = -1
+// Output: false
+// Explanation: There is no cycle in the linked list.
+ 
+
+// Constraints:
+// The number of the nodes in the list is in the range [0, 104].
+// -105 <= Node.val <= 105
+// pos is -1 or a valid index in the linked-list.
+ 
+
+// Follow up: Can you solve it using O(1) (i.e. constant) memory?
+
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+// public class Solution {
+//     public boolean hasCycle(ListNode head) {
+        
+//     }
+// }
+
+
+ 
+class ListNode{
+    int val;
+    ListNode next;
+    ListNode(int x){
+        val = x;
+        next = null;
+    }
+}
+
+public class Main
+{
+    
+    ListNode head;
+    ListNode prev;
+    int size = 0;
+    
+    void insert(int val){
+        ListNode temp;
+        if(head == null){
+            head = new ListNode(val);
+            prev = head;
+            System.out.println("head : " + head);
+        }else{
+            temp = new ListNode(val);
+            prev.next = temp;
+            prev = temp;
+            System.out.println("temp : " + temp);
+        }
+        size++;
+        
+    }
+    
+    void circular(int pos){
+        if(pos == -1)
+            return;
+            
+        int count = 0;
+        ListNode temp = head;
+        while(temp != null){
+            if(count == pos){
+                prev.next = temp;
+                break;
+            }
+            temp = temp.next;
+            count++;
+        }
+    }
+    
+    public boolean hasCycle(ListNode head) {
+        // Approach:
+        // We use Floyd's Cycle Detection Algorithm, also known as the
+        // Slow and Fast Pointer technique.
+        //
+        // - Initialize two pointers, slow and fast, at the head of the list.
+        // - Move slow one node at a time.
+        // - Move fast two nodes at a time.
+        // - If there is no cycle:
+        //     - fast will eventually reach null.
+        //     - Therefore, return false.
+        // - If there is a cycle:
+        //     - slow and fast will eventually meet at the same node.
+        //     - Therefore, return true.
+        // - Continue this process until either:
+        //     - fast becomes null or fast.next becomes null, meaning there is no cycle.
+        //     - slow == fast, meaning a cycle exists.
+        //
+        // Time Complexity:
+        // O(n)
+        // In the worst case, the pointers may traverse the linked list multiple times,
+        // but the total number of steps is linear with respect to the number of nodes.
+        //
+        // Space Complexity:
+        // O(1)
+        // Only two pointers (slow and fast) are used.
+        // No extra data structures are required.
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast)
+                return true;
+        }
+        return false;
+    }
+
+    
+    void print(){
+        ListNode temp = head;
+        while(temp != null){
+            System.out.println("temp.val : " + temp.val);
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+    
+    
+	public static void main(String[] args) {
+	    Main x = new Main();
+	    
+	    // Input: head = [3,2,0,-4], pos = 1 output = true
+	    // Input: head = [1,2], pos = 0  Output: true
+        // Input: head = [1], pos = -1  Output: false
+
+	    int arr[] = {1};
+	    int pos = -1;
+        for(int i = 0; i < arr.length; i++){
+            x.insert(arr[i]);
+        }
+	    x.print();
+	    x.circular(pos);
+	   // x.print();
+	   boolean b = x.hasCycle(x.head);
+	   System.out.println(b);
+	   
+	}
+}
