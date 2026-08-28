@@ -1,0 +1,274 @@
+// 142. Linked List Cycle II
+
+// Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+// There is a cycle in a linked list if there is some node in the list that can be reached again by 
+// continuously following the next pointer. Internally, pos is used to denote the index of the node that 
+// tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not 
+// passed as a parameter.
+
+// Do not modify the linked list.
+
+// Example 1:
+// Input: head = [3,2,0,-4], pos = 1
+// Output: tail connects to node index 1
+// Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+// Example 2:
+// Input: head = [1,2], pos = 0
+// Output: tail connects to node index 0
+// Explanation: There is a cycle in the linked list, where tail connects to the first node.
+
+// Example 3:
+// Input: head = [1], pos = -1
+// Output: no cycle
+// Explanation: There is no cycle in the linked list.
+ 
+
+// Constraints:
+// The number of the nodes in the list is in the range [0, 104].
+// -105 <= Node.val <= 105
+// pos is -1 or a valid index in the linked-list.
+ 
+
+// Follow up: Can you solve it using O(1) (i.e. constant) memory?
+
+
+
+
+ 
+class ListNode{
+    int val;
+    ListNode next;
+    ListNode(int x){
+        val = x;
+        next = null;
+    }
+}
+
+public class Main
+{
+    
+    ListNode head;
+    ListNode prev;
+    int size = 0;
+    
+    void insert(int val){
+        ListNode temp;
+        if(head == null){
+            head = new ListNode(val);
+            prev = head;
+            // System.out.println("head : " + head);
+        }else{
+            temp = new ListNode(val);
+            prev.next = temp;
+            prev = temp;
+            // System.out.println("temp : " + temp);
+        }
+        size++;
+        
+    }
+    
+    void circular(int pos){
+        if(pos == -1)
+            return;
+            
+        int count = 0;
+        ListNode temp = head;
+        while(temp != null){
+            if(count == pos){
+                prev.next = temp;
+                break;
+            }
+            temp = temp.next;
+            count++;
+        }
+    }
+    
+    
+    public ListNode detectCycle(ListNode head) {
+        
+        // Approach:
+        // We use Floyd's Cycle Detection Algorithm, also known as the
+        // Slow and Fast Pointer technique.
+        //
+        // The algorithm has two main phases:
+        //
+        // Phase 1: Detect whether a cycle exists
+        //
+        // - Initialize two pointers, slow and fast, at the head of the list.
+        // - Move slow one node at a time.
+        // - Move fast two nodes at a time.
+        // - If there is no cycle:
+        //     - fast will eventually become null.
+        //     - Or fast.next will become null.
+        //     - Therefore, no cycle exists and we return null.
+        // - If there is a cycle:
+        //     - slow and fast will eventually meet at the same node.
+        //     - This confirms that a cycle exists.
+        //
+        // Phase 2: Find the starting node of the cycle
+        //
+        // - Once slow and fast meet, we know that a cycle exists.
+        // - Reset slow back to the head of the linked list.
+        // - Keep fast at the meeting point.
+        // - Move both slow and fast one node at a time.
+        // - Eventually, slow and fast will meet again.
+        // - The node where they meet is the starting node of the cycle.
+        //
+        // Code Explanation:
+        //
+        // - ListNode slow = head;
+        //     - Initialize slow at the head.
+        //     - slow moves one node at a time.
+        //
+        // - ListNode fast = head;
+        //     - Initialize fast at the head.
+        //     - fast moves two nodes at a time.
+        //
+        // - boolean b = false;
+        //     - Used to keep track of whether a cycle was found.
+        //
+        // - aa:
+        //     - This is a Java label.
+        //     - It allows us to use "break aa;" to exit the labeled while loop.
+        //
+        // - while(fast != null && fast.next != null):
+        //     - Continue checking while fast can safely move two nodes.
+        //     - If fast becomes null or fast.next becomes null,
+        //       there is no cycle.
+        //
+        // - slow = slow.next;
+        //     - Move slow one step forward.
+        //
+        // - fast = fast.next.next;
+        //     - Move fast two steps forward.
+        //
+        // - if(slow == fast):
+        //     - If both pointers point to the same node,
+        //       a cycle has been detected.
+        //
+        // - slow = head;
+        //     - Reset slow back to the beginning of the linked list.
+        //
+        // - while(slow != fast):
+        //     - Move both pointers one step at a time.
+        //     - When they meet, that node is the beginning of the cycle.
+        //
+        // - b = true;
+        //     - Indicates that a cycle was found.
+        //
+        // - break aa;
+        //     - Exit the labeled while loop because we found the cycle
+        //       and its starting node.
+        //
+        // - System.out.println("Slow " + slow);
+        //     - Prints the node where the cycle begins.
+        //     - Note: this depends on how ListNode.toString() is implemented.
+        //
+        // - return b ? slow : null;
+        //     - If a cycle was found, return the node where the cycle starts.
+        //     - Otherwise, return null.
+        //
+        //
+        // Example:
+        //
+        //        1 → 2 → 3 → 4 → 5
+        //                  ↑       ↓
+        //                  ← ← ← ←
+        //
+        // - Initially:
+        //     slow = 1
+        //     fast = 1
+        //
+        // - After one iteration:
+        //     slow = 2
+        //     fast = 3
+        //
+        // - After another iteration:
+        //     slow = 3
+        //     fast = 5
+        //
+        // - Eventually, slow and fast meet inside the cycle.
+        // - Reset slow to head (1).
+        // - Move slow and fast one step at a time.
+        // - They eventually meet at node 3.
+        // - Therefore, node 3 is the starting point of the cycle.
+        //
+        //
+        // Time Complexity:
+        // O(n)
+        // The linked list is traversed a linear number of times.
+        // Floyd's algorithm uses constant-speed pointer movements,
+        // so the overall time complexity is O(n).
+        //
+        //
+        // Space Complexity:
+        // O(1)
+        // Only two pointers (slow and fast) and one boolean variable are used.
+        // No extra data structures such as HashSet or arrays are required.
+
+        ListNode slow = head;
+        ListNode fast = head;
+        boolean b = false;
+        aa:
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                slow = head;
+                while(slow != fast){
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                b = true;
+                break aa;
+            }
+        }
+        // System.out.println("Slow " + slow);
+        return b ? slow : null;
+    }
+
+    
+    void print(){
+        ListNode temp = head;
+        while(temp != null){
+            System.out.println("temp : " + temp);
+            System.out.println("temp.val : " + temp.val);
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+    
+    
+	public static void main(String[] args) {
+	    Main x = new Main();
+	    
+	    
+	    // Input: head = [3,2,0,-4], pos = 1 output = true
+	    // Input: head = [1,2], pos = 0  Output: true
+        // Input: head = [1], pos = -1  Output: false
+        
+        
+// Input head = [1,2] pos =  0
+// Output  tail connects to node index 1
+// Expected  tail connects to node index 0
+
+	    int arr[] = {1,2};
+	    int pos = 0;
+        for(int i = 0; i < arr.length; i++){
+            x.insert(arr[i]);
+        }
+	    x.print();
+	    x.circular(pos);
+	   //x.detectCycle(head)
+	   // x.print();
+	   ListNode b = x.detectCycle(x.head);
+	   System.out.println(b);
+	   
+	}
+}
+
+
+
+
