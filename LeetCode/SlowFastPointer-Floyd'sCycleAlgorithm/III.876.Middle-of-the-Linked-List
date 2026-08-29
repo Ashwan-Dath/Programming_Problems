@@ -7,22 +7,23 @@
  
 
 // Example 1:
+
+
 // Input: head = [1,2,3,4,5]
 // Output: [3,4,5]
 // Explanation: The middle node of the list is node 3.
-
 // Example 2:
+
+
 // Input: head = [1,2,3,4,5,6]
 // Output: [4,5,6]
 // Explanation: Since the list has two middle nodes with values 3 and 4, we return the second one.
  
 
 // Constraints:
+
 // The number of nodes in the list is in the range [1, 100].
 // 1 <= Node.val <= 100
-
-
-
  
 class ListNode{
     int val;
@@ -74,67 +75,30 @@ public class Main
         }
     }
     
-    public ListNode hasCycle(ListNode head) {
+    public ListNode midPoint(ListNode head) {
         
         // Approach:
-        // We use Floyd's Cycle Detection Algorithm, also known as the
-        // Slow and Fast Pointer technique.
-        
-        // - Initialize two pointers, slow and fast, at the head of the list.
-        // - Move slow one node at a time.
-        // - Move fast two nodes at a time.
-        // - If there is no cycle:
-        //     - fast will eventually reach null.
-        //     - Therefore, return false.
-        // - If there is a cycle:
-        //     - slow and fast will eventually meet at the same node.
-        //     - Therefore, return true.
-        // - Continue this process until either:
-        //     - fast becomes null or fast.next becomes null, meaning there is no cycle.
-        //     - slow == fast, meaning a cycle exists.
-        
-        // Time Complexity:
-        // O(n)
-        // In the worst case, the pointers may traverse the linked list multiple times,
-        // but the total number of steps is linear with respect to the number of nodes.
-        
-        // Space Complexity:
-        // O(1)
-        // Only two pointers (slow and fast) are used.
-        // No extra data structures are required.
+        // 1. Use two pointers, slow and fast, starting from the head.
+        // 2. Move slow one node at a time.
+        // 3. Move fast two nodes at a time.
+        // 4. When fast reaches the end of the linked list, slow will be
+        //    pointing to the middle node.
+        // 5. For an even number of nodes, slow will point to the second
+        //    middle node.
+        //
+        // Time Complexity: O(n)
+        // Space Complexity: O(1)        
         
         ListNode slow = head;
         ListNode fast = head;
-        int count = 1;
-        ListNode temp;
-        aa:
+        
         while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
-            if(slow == fast){
-                slow = head;
-                while(slow != fast){
-                    System.out.print("slow " + slow);
-                    System.out.println("  fast " + fast);
-                    count++;
-                    slow = slow.next;
-                    fast = fast.next;
-                }
-                break aa;
-            }
         }
-        System.out.println(count);
-        temp = slow;
-        slow = slow.next;
-        do{
-            slow = slow.next;
-            count++;
-        }while(slow != temp);
-        System.out.println(count);
-        int mid = count / 2;
-        System.out.println("mid " + mid);
         
         return slow;
+
     }
 
     
@@ -151,21 +115,14 @@ public class Main
 	public static void main(String[] args) {
 	    Main x = new Main();
 	    
-	    // Input: head = [3,2,0,-4], pos = 1 output = true
-	    // Input: head = [1,2], pos = 0  Output: true
-        // Input: head = [1], pos = -1  Output: false
-
-// Input: head = [1,2,3,4,5,6]
-
-	    int arr[] = {1,2,3,4,5};
+	    int arr[] = {1,2,3,4,5,6};
 	    int pos = 2;
         for(int i = 0; i < arr.length; i++){
             x.insert(arr[i]);
         }
 	    x.print();
-	    x.circular(pos);
-	   // x.print();
-	   ListNode b = x.hasCycle(x.head);
+	   // x.circular(pos);
+	   ListNode b = x.midPoint(x.head);
 	   System.out.println(b);
 	   
 	}
