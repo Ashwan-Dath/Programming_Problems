@@ -1,0 +1,230 @@
+// 19. Remove Nth Node From End of List
+
+// Given the head of a linked list, remove the nth node from the end of the list and return its head.
+
+// Example 1:
+// Input: head = [1,2,3,4,5], n = 2
+// Output: [1,2,3,5]
+
+// Example 2:
+// Input: head = [1], n = 1
+// Output: []
+
+// Example 3:
+// Input: head = [1,2], n = 1
+// Output: [1]
+
+
+// Constraints:
+// The number of nodes in the list is sz.
+// 1 <= sz <= 30
+// 0 <= Node.val <= 100
+// 1 <= n <= sz
+
+
+
+class ListNode {
+	int val;
+	ListNode next;
+	ListNode(int x) {
+		val = x;
+		next = null;
+	}
+}
+
+public class Main
+{
+
+	ListNode head;
+	ListNode prev;
+	int size = 0;
+
+	void insert(int val) {
+		ListNode temp;
+		if(head == null) {
+			head = new ListNode(val);
+			prev = head;
+			System.out.println("head : " + head);
+		} else {
+			temp = new ListNode(val);
+			prev.next = temp;
+			prev = temp;
+			System.out.println("temp : " + temp);
+		}
+		size++;
+
+	}
+
+	void circular(int pos) {
+		if(pos == -1)
+			return;
+
+		int count = 0;
+		ListNode temp = head;
+		while(temp != null) {
+			if(count == pos) {
+				prev.next = temp;
+				System.out.println("temp " + temp);
+				break;
+			}
+			temp = temp.next;
+			count++;
+			System.out.println("count " + count + " pos " + pos);
+		}
+	}
+
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+	    
+	    // Approach: Two Pointer
+        // 1. We create a dummy node before the head.
+        //    This helps us handle the case where the head itself needs to be removed.
+        //
+        // 2. We use two pointers:
+        //      fast -> starts at dummy
+        //      slow -> starts at dummy
+        //
+        // 3. We move the fast pointer n steps forward.
+        //    This creates a gap of n nodes between fast and slow.
+        //
+        // 4. Then, we move both fast and slow together until fast reaches
+        //    the last node.
+        //
+        // 5. At this point, slow will be pointing to the node just before
+        //    the node that needs to be removed.
+        //
+        // 6. We remove the node using:
+        //      slow.next = slow.next.next
+        //
+        // 7. Finally, we return dummy.next as the new head.
+        //
+        // Time Complexity: O(L)
+        //   - We traverse the linked list only once.
+        //
+        // Space Complexity: O(1)
+        //   - We only use fast, slow and dummy pointers.
+        //   - No extra data structure is used.
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+    
+        ListNode fast = dummy;
+        ListNode slow = dummy;
+    
+        // Move fast pointer n steps ahead
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
+        }
+    
+        // Move both pointers until fast reaches the last node
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+    
+        // Remove the nth node from the end
+        slow.next = slow.next.next;
+    
+        return dummy.next;
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+// ------------------------------------------------------------------------------------------------
+	    // Approach: Traverse (My first Approach)
+        // 1. First, we traverse the linked list and find the total number of nodes.
+        // 2. We calculate the position of the node to be removed from the beginning:
+        //      node = count - n
+        // 3. If node == 0, it means the head node needs to be removed,
+        //    so we move head to head.next.
+        // 4. Otherwise, we traverse the list until we reach the node just before
+        //    the node that needs to be removed.
+        // 5. We remove the node by changing the next pointer:
+        //      temp.next = temp.next.next
+        // 6. Finally, we return the updated head.
+        //
+        // Time Complexity: O(L)
+        //   - First traversal takes O(L)
+        //   - Second traversal takes O(L)
+        //   - O(L) + O(L) = O(L)
+        //
+        // Space Complexity: O(1)
+        //   - We only use a few variables (count, node, temp).
+        //   - No extra data structure is used.
+
+		if(head.next == null) {
+		    if(n==1){
+    			head = head.next;
+		    }
+			return head;
+		}
+
+		int count = 0;
+		ListNode temp = head;
+		
+		while(temp != null ) {
+			count++;
+			temp = temp.next;
+		}
+		
+		int node = count - n;
+
+		count = 0;
+		temp = head;
+		
+		while(count < node) {
+		    if(count != 0)
+			    temp = temp.next;
+
+			count++;
+		}
+		
+		if(node == 0){
+		    head = head.next;
+		}else{
+    		temp.next = temp.next.next;
+		}
+		
+		return head;
+	}
+
+
+
+	void print() {
+		System.out.println("Print");
+		ListNode temp = head;
+		while(temp != null) {
+			System.out.println("temp : " + temp);
+			System.out.println("temp.val : " + temp.val);
+			temp = temp.next;
+		}
+		System.out.println();
+	}
+
+
+	public static void main(String[] args) {
+
+		Main x = new Main();
+		
+		// Input: head = [1], n = 1 Output: []
+		// Input: head = [1,2,3,4,5], n = 2 Output: [1,2,3,5]
+		// Input: head = [1,2], n = 1 Output: [1]
+		
+		int arr[] = {1};
+		int pos = 2;
+		for(int i = 0; i < arr.length; i++) {
+			x.insert(arr[i]);
+		}
+		x.print();
+		// x.circular(pos);
+		//x.head = x.midPoint(x.head);
+		x.head = x.removeNthFromEnd(x.head, pos);
+		x.print();
+		//System.out.println(b);
+
+	}
+}
