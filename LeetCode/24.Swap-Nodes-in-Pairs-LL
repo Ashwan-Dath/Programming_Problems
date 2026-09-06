@@ -87,24 +87,6 @@ public class Main
 	
     public ListNode swapPairs(ListNode head) {
         
-        ListNode dum = new ListNode(0);
-        
-        ListNode prev = dum;
-        dum.next = head;
-        ListNode temp = head;
-        
-        while(temp != null && temp.next != null){
-            
-            ListNode first = temp;
-            ListNode dup = temp;
-            temp = temp.next;
-            ListNode second = temp;
-            
-            first = second;
-            second = dup;
-            
-            
-        }
         // Approach: Iterative / Pointer Manipulation
 
         // 1. We use a temp pointer to traverse the linked list pair by pair.
