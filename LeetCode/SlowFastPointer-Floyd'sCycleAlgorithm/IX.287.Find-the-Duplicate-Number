@@ -1,0 +1,127 @@
+// 287. Find the Duplicate Number
+
+// Given an array of integers nums containing n + 1 integers 
+// where each integer is in the range [1, n] inclusive.
+
+// There is only one repeated number in nums, return this repeated number.
+// You must solve the problem without modifying the array nums and using only constant extra space.
+
+ 
+// Example 1:
+// Input: nums = [1,3,4,2,2]
+// Output: 2
+
+// Example 2:
+// Input: nums = [3,1,3,4,2]
+// Output: 3
+
+// Example 3:
+// Input: nums = [3,3,3,3,3]
+// Output: 3
+ 
+
+// Constraints:
+// 1 <= n <= 105
+// nums.length == n + 1
+// 1 <= nums[i] <= n
+
+// All the integers in nums appear only once except for precisely one integer 
+// which appears two or more times.
+ 
+
+// Follow up:
+// How can we prove that at least one duplicate number must exist in nums?
+// Can you solve the problem in linear runtime complexity?
+
+public class Main
+{
+    
+    public static int findDuplicate(int[] nums) {
+        // APPROACH:
+        // We treat the array like a linked list.
+        //
+        // nums[i] tells us the next position to go to.
+        // For example:
+        // nums = [1, 3, 4, 2, 2]
+        //
+        // 0 -> nums[0] = 1 -> index 1
+        // 1 -> nums[1] = 3 -> index 3
+        // 3 -> nums[3] = 2 -> index 2
+        // 2 -> nums[2] = 4 -> index 4
+        // 4 -> nums[4] = 2 -> index 2
+        //
+        // So we get a cycle:
+        //
+        // 2 -> 4 -> 2 -> 4 -> ...
+        //
+        // The duplicate number creates this cycle.
+        //
+        // We use Floyd's Cycle Detection (Slow/Fast pointers).
+        //
+        // PHASE 1:
+        // Slow moves one step at a time.
+        // Fast moves two steps at a time.
+        // When they meet, we know we are inside the cycle.
+        //
+        // PHASE 2:
+        // Reset slow to nums[0].
+        // Keep fast at the meeting point.
+        // Move both one step at a time.
+        // They will meet at the entrance of the cycle.
+        // That value is the duplicate number.
+        //
+        // TIME COMPLEXITY:
+        // O(n)
+        // We traverse the sequence a constant number of times.
+        //
+        // SPACE COMPLEXITY:
+        // O(1)
+        // We only use two pointers (slow and fast).
+        //
+        // CODE:
+        
+        int slow = nums[0];
+        int fast = nums[0];
+        
+        while (true) {
+        
+            // Slow moves one step
+            slow = nums[slow];
+        
+            // Fast moves two steps
+            fast = nums[nums[fast]];
+        
+            // Both pointers met inside the cycle
+            if (slow == fast) {
+                break;
+            }
+        }
+        
+        // Move slow back to the beginning
+        slow = nums[0];
+        
+        // Move both pointers one step at a time
+        // until they meet at the cycle entrance
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        
+        // The cycle entrance is the duplicate number
+        return slow;
+    }
+
+	public static void main(String[] args) {
+	    // Input: nums = [1,3,4,2,2] Output: 2
+        // Input: nums = [3,1,3,4,2]  Output: 3
+        // Input: nums = [3,3,3,3,3] Output: 3
+
+// 		int input[] = {1,3,4,2,2};
+// 		int input[] = {3,1,3,4,2};
+		int input[] = {1,4,2,6,3,7,5,10,12,8,11,13,9,15,2,14};
+// 		int input[] = {3,3,3,3,3,3};
+		int val = findDuplicate(input);
+// 		System.out.println(input[val]);
+		System.out.println(val);
+	}
+}
