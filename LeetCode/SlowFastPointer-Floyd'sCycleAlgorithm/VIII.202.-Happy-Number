@@ -1,0 +1,155 @@
+// 202. Happy Number
+
+// Write an algorithm to determine if a number n is happy.
+
+// A happy number is a number defined by the following process:
+
+// Starting with any positive integer, replace the number by the sum of the squares of its digits.
+
+// Repeat the process until the number equals 1 (where it will stay), 
+// or it loops endlessly in a cycle which does not include 1.
+
+// Those numbers for which this process ends in 1 are happy.
+// Return true if n is a happy number, and false if not.
+
+ 
+
+// Example 1:
+// Input: n = 19
+// Output: true
+// Explanation:
+// 1^2 + 9^2 = 82
+// 8^2 + 2^2 = 68
+// 6^2 + 8^2 = 100
+// 1^2 + 0^2 + 0^2 = 1
+
+
+// Example 2:
+// Input: n = 2
+// Output: false
+ 
+
+// Constraints:
+// 1 <= n <= 231 - 1
+
+
+
+import java.util.HashSet;
+public class Main
+{
+    
+    public boolean isHappy(int n) {
+        
+        // APPROACH:
+        //
+        // We need to repeatedly replace n with the sum of the squares
+        // of its digits.
+        //
+        // Example of one transformation:
+        // n = 19
+        // 1² + 9² = 82
+        //
+        // Then we repeat the same process with 82:
+        // 8² + 2² = 68
+        //
+        // We continue this process until:
+        // 1. The sum becomes 1 -> Happy Number -> return true
+        // 2. A number that we have already seen appears again
+        //    -> a cycle exists -> return false
+        //
+        // To detect a cycle, we use a HashSet.
+        //
+        // HashSet<Integer> store = new HashSet<>();
+        //
+        // Before continuing with a new sum, we try to add it to the HashSet.
+        //
+        // if (!store.add(sum)) {
+        //     return false;
+        // }
+        //
+        // HashSet.add() returns:
+        // true  -> sum was not present, so it is added.
+        // false -> sum was already present, so a cycle exists.
+        //
+        // Once sum == 1, we return true.
+        //
+        //
+        // TIME COMPLEXITY:
+        //
+        // Let D be the number of digits in n.
+        // Calculating the sum of the squares of the digits takes O(D).
+        //
+        // We repeat this process K times until we reach 1 or detect a cycle.
+        //
+        // Therefore, the precise complexity is:
+        //
+        // Time: O(D * K)
+        //
+        // Since D = O(log n), this is commonly expressed as:
+        //
+        // Time: O(log n)     [for this problem, K is bounded]
+        //
+        //
+        // SPACE COMPLEXITY:
+        //
+        // We use a HashSet to store the previously seen sums.
+        //
+        // If K different values are stored:
+        //
+        // Space: O(K)
+        //
+        // For this problem, the sequence eventually becomes bounded
+        // and enters either 1 or a cycle.
+        //
+        // Commonly:
+        //
+        // Space: O(log n)
+
+        HashSet<Integer> store = new HashSet<>();
+        boolean b = false;
+        int dup = n;
+        while(n != 1){
+            System.out.println("dup " + dup);
+            int sum = 0;
+            while(n != 0){
+                int rev = n % 10;
+                System.out.println("inside rev " + rev);
+                sum = sum + (rev * rev);
+                n /= 10;
+            }
+            System.out.println("before sum " + sum);
+            
+            
+            // 
+            // if(store.contains(sum)){
+            //     return false;
+            // }
+            // store.add(sum);
+            
+            System.out.println("store " + store);
+            
+            if (!store.add(sum)) {
+                return false;
+            }
+            
+            
+            if(sum == 1){
+                return true;
+            }
+            else{
+                n = sum;
+            }
+            System.out.println("after sum " + sum);
+        }
+        return false;
+    }
+
+	public static void main(String[] args) {
+	    Main x = new Main();
+	    
+	    int n = 99;
+	    boolean b = x.isHappy(n);
+	    System.out.println(b);
+	    
+	}
+}
