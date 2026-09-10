@@ -5,24 +5,21 @@
 // A happy number is a number defined by the following process:
 
 // Starting with any positive integer, replace the number by the sum of the squares of its digits.
-
-// Repeat the process until the number equals 1 (where it will stay), 
-// or it loops endlessly in a cycle which does not include 1.
-
+// Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
 // Those numbers for which this process ends in 1 are happy.
 // Return true if n is a happy number, and false if not.
 
  
 
 // Example 1:
+
 // Input: n = 19
 // Output: true
 // Explanation:
-// 1^2 + 9^2 = 82
-// 8^2 + 2^2 = 68
-// 6^2 + 8^2 = 100
-// 1^2 + 0^2 + 0^2 = 1
-
+// 12 + 92 = 82
+// 82 + 22 = 68
+// 62 + 82 = 100
+// 12 + 02 + 02 = 1
 
 // Example 2:
 // Input: n = 2
@@ -32,16 +29,94 @@
 // Constraints:
 // 1 <= n <= 231 - 1
 
-
-
-import java.util.HashSet;
 public class Main
 {
     
-    public boolean isHappy(int n) {
-        
-        // APPROACH:
+    public static int sqrNum(int n){
+        int sum = 0;
+        while(n != 0){
+            int d = n % 10;
+            sum = sum + (d * d);
+            n = n/10;
+        }
+        return sum;
+    }
+    
+    public static boolean isHappy(int n) {
+
+        // Explanation:
+        // This method checks whether a number is a Happy Number using Floyd's
+        // Cycle Detection Algorithm (Slow and Fast Pointer).
         //
+        // A Happy Number is a number where repeatedly replacing the number with
+        // the sum of the squares of its digits eventually reaches 1.
+        //
+        // Example:
+        // 19 -> 1² + 9² = 82
+        // 82 -> 8² + 2² = 68
+        // 68 -> 6² + 8² = 100
+        // 100 -> 1² + 0² + 0² = 1
+        // Therefore, 19 is a Happy Number.
+        //
+        // sqrNum(n):
+        // - Extracts each digit using n % 10.
+        // - Adds the square of each digit to sum.
+        // - Removes the last digit using n / 10.
+        // - Returns the sum of squares of the digits.
+        //
+        // isHappy(n):
+        // - slow moves one step at a time.
+        // - fast moves two steps at a time.
+        // - If the sequence reaches 1, the number is Happy.
+        // - If slow and fast meet at a value other than 1, a cycle exists,
+        //   so the number is not Happy.
+        //
+        // Why does cycle detection work?
+        // Every number eventually becomes a relatively small number after
+        // repeatedly calculating the sum of squares of its digits.
+        // Therefore, the sequence either reaches 1 or enters a cycle.
+        // Floyd's algorithm detects that cycle without using extra memory.
+        //
+        // Time Complexity:
+        // O(log n)
+        //
+        // sqrNum() processes all digits of n, so it takes O(log n).
+        // The cycle detection also performs a bounded number of operations,
+        // giving an overall complexity of O(log n).
+        //
+        // Space Complexity:
+        // O(1)
+        //
+        // We only use a few integer variables (slow, fast, sum, d),
+        // so no extra data structure is required.
+
+        int slow = n;
+        int fast = n;
+        
+        while(fast != 1){
+            slow = sqrNum(slow);
+            fast = sqrNum(fast);
+            fast = sqrNum(fast);
+            System.out.println("slow " + slow + " fast " + fast );
+            if(slow == fast && slow != 1){
+                return false;
+            }
+        }
+        System.out.println(slow + " " + fast);
+        
+        return true;
+
+
+
+
+
+
+
+
+
+// -------------------------------------------------------------------------------
+
+        // APPROACH: 1 using Extra space.
         // We need to repeatedly replace n with the sum of the squares
         // of its digits.
         //
@@ -105,51 +180,48 @@ public class Main
         //
         // Space: O(log n)
 
-        HashSet<Integer> store = new HashSet<>();
-        boolean b = false;
-        int dup = n;
-        while(n != 1){
-            System.out.println("dup " + dup);
-            int sum = 0;
-            while(n != 0){
-                int rev = n % 10;
-                System.out.println("inside rev " + rev);
-                sum = sum + (rev * rev);
-                n /= 10;
-            }
-            System.out.println("before sum " + sum);
+        // HashSet<Integer> store = new HashSet<>();
+        // boolean b = false;
+        // int dup = n;
+        // while(n != 1){
+        //     System.out.println("dup " + dup);
+        //     int sum = 0;
+        //     while(n != 0){
+        //         int rev = n % 10;
+        //         System.out.println("inside rev " + rev);
+        //         sum = sum + (rev * rev);
+        //         n /= 10;
+        //     }
+        //     System.out.println("before sum " + sum);
             
             
-            // 
-            // if(store.contains(sum)){
-            //     return false;
-            // }
-            // store.add(sum);
+        //     // 
+        //     // if(store.contains(sum)){
+        //     //     return false;
+        //     // }
+        //     // store.add(sum);
             
-            System.out.println("store " + store);
+        //     System.out.println("store " + store);
             
-            if (!store.add(sum)) {
-                return false;
-            }
+        //     if (!store.add(sum)) {
+        //         return false;
+        //     }
             
             
-            if(sum == 1){
-                return true;
-            }
-            else{
-                n = sum;
-            }
-            System.out.println("after sum " + sum);
-        }
-        return false;
+        //     if(sum == 1){
+        //         return true;
+        //     }
+        //     else{
+        //         n = sum;
+        //     }
+        //     System.out.println("after sum " + sum);
+        // }
+        // return false;
     }
 
 	public static void main(String[] args) {
-	    Main x = new Main();
-	    
-	    int n = 99;
-	    boolean b = x.isHappy(n);
+	    int num = 10;
+	    boolean b = isHappy(num);
 	    System.out.println(b);
-	    
 	}
 }
